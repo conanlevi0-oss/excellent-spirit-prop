@@ -200,7 +200,7 @@ const Home = () => {
             <p>We pride ourselves on <strong>customer care</strong> and <strong>excellent service</strong>. Join our happy clients who have experienced a trusted, transparent and approved real estate process.</p>
             <div className="cta-buttons">
               <Link to="/contact" className="btn btn-accent">Contact Our Team</Link>
-              <a href="https://wa.me/256777367716" className="btn btn-outline" style={{color:'white', borderColor:'white'}}>Chat on WhatsApp</a>
+              <a href="/exc.pdf" download className="btn btn-outline" style={{color:'white', borderColor:'white'}}>Download 2025 Catalog</a>
             </div>
           </div>
           <div className="cta-testimonial">

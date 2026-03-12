@@ -96,6 +96,15 @@ const Properties = () => {
             <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>New Estate Update 2025J</span>
             <h2 className="section-title">Comprehensive Price List</h2>
             <p className="section-subtitle">Examine our wide selection of estates grouped by major road access.</p>
+            
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '20px' }}>
+              <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px' }}>
+                <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} /> View Full PDF
+              </a>
+              <a href="/exc.pdf" download="Excellent_Spirit_Estate_Update_2025.pdf" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px' }}>
+                <ChevronDown size={18} /> Download Catalog
+              </a>
+            </div>
           </div>
 
           <div className="estate-accordion">

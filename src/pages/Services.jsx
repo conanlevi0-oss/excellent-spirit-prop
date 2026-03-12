@@ -98,6 +98,16 @@ const Services = () => {
                       </li>
                     ))}
                   </ul>
+
+                  {service.id === "land-sales" && (
+                    <div style={{ marginTop: '30px', padding: '20px', background: '#f8fafc', borderRadius: '8px', border: '1px solid #edf2f7', display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                      <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', margin: 0 }}>This list is sourced from our official 2025 Estate Update guide.</p>
+                      <div style={{ display: 'flex', gap: '10px' }}>
+                        <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '8px 15px', fontSize: '0.9rem' }}>View PDF</a>
+                        <a href="/exc.pdf" download="Excellent_Spirit_Land_Catalog_2025.pdf" className="btn btn-primary" style={{ padding: '8px 15px', fontSize: '0.9rem' }}>Download Catalog</a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
