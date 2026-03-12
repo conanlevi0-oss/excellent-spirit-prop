@@ -6,13 +6,13 @@ const Services = () => {
       id: "land-sales",
       icon: <Map size={40} color="var(--accent-gold)" />,
       title: "Land Sales",
-      category: "Our Premium Service",
-      description: "We offer secure and prime locations for both residential and commercial development. All our land transactions are legally verified and transparent.",
+      category: "Private Mailo, Kabaka & Freehold",
+      description: "We sell titled Private Mailo, Kabaka and Freehold land. Our selection includes over 80 estates across major road corridors to suit every budget.",
       features: [
-        "Private Mailo Land (with title)",
-        "Kabaka Land options",
-        "Freehold Land in emerging areas",
-        "Assisted site visits in and around Kampala"
+        "Secure Private Mailo Land",
+        "Authentic Kabaka Land",
+        "Verified Freehold Land",
+        "Ready land titles for all titled plots"
       ],
       image: "/property_land_1.png"
     },
@@ -20,27 +20,27 @@ const Services = () => {
       id: "surveying",
       icon: <MapPin size={40} color="var(--accent-gold)" />,
       title: "Land Surveying",
-      category: "Professional Services",
-      description: "Our licensed surveyors provide precise measurements and boundary demarcation to ensure your investment is protected and legally sound.",
+      category: "Professional Accuracy",
+      description: "We survey land with precision, ensuring boundary opening and demarcation are handled professionally to protect your investment.",
       features: [
-        "Boundary opening and marking",
-        "Topographical surveys",
-        "Subdivision of land",
-        "Resolution of boundary disputes"
+        "Professional boundary opening",
+        "Cadastral surveying",
+        "Subdivision services",
+        "Accurate boundary markers"
       ],
       image: "/hero_background.png"
     },
     {
       id: "title-transfer",
       icon: <Building2 size={40} color="var(--accent-gold)" />,
-      title: "Land Title Processing",
-      category: "Legal & Administrative",
-      description: "We navigate the complex administrative processes of land documentation in Uganda so you don't have to.",
+      title: "Title Processing",
+      category: "Documentation Support",
+      description: "We process transfer titles efficiently, handling the bureaucracy so you can secure your land ownership without stress.",
       features: [
         "Transfer of land titles",
-        "Registration of caveats",
-        "Search and verification of titles",
-        "Comprehensive documentation support"
+        "Title search and verification",
+        "Caveat registration and management",
+        "General legal document support"
       ],
       image: "/exc.jpeg"
     },

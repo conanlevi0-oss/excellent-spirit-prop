@@ -60,6 +60,46 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Core Values Section */}
+      <section className="section bg-white">
+        <div className="container">
+          <h2 className="section-title">Our Core Values</h2>
+          <p className="section-subtitle">The pillars that define our service excellence and professional conduct.</p>
+          <div className="values-grid">
+            <div className="value-card">
+              <span className="value-number">01</span>
+              <h3>Christ Centeredness</h3>
+              <p>Everything we do is built on the foundation of our faith and Christian values.</p>
+            </div>
+            <div className="value-card">
+              <span className="value-number">02</span>
+              <h3>Stewardship</h3>
+              <p>We believe in responsible management of the resources and land entrusted to us.</p>
+            </div>
+            <div className="value-card">
+              <span className="value-number">03</span>
+              <h3>Professionalism</h3>
+              <p>We maintain the highest standards of service and conduct in every transaction.</p>
+            </div>
+            <div className="value-card">
+              <span className="value-number">04</span>
+              <h3>Servanthood</h3>
+              <p>We are here to serve our clients' needs with humility and dedication.</p>
+            </div>
+            <div className="value-card">
+              <span className="value-number">05</span>
+              <h3>Diligence</h3>
+              <p>We are thorough and persistent in ensuring every land title and deal is verified.</p>
+            </div>
+            <div className="value-card">
+              <span className="value-number">06</span>
+              <h3>Integrity</h3>
+              <p>Honesty and transparency are at the core of our business dealings.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Services Section */}
       <section className="section bg-light-alt">
         <div className="container">

@@ -1,8 +1,19 @@
-import { MapPin, Phone } from 'lucide-react';
+import { MapPin, Phone, ChevronDown, ChevronUp, DollarSign, Ruler, Clock, Landmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { estatesData } from '../data/estates';
 
 const Properties = () => {
+  const [expandedRoads, setExpandedRoads] = useState(['Gayaza Road Estates']);
+
+  const toggleRoad = (road) => {
+    setExpandedRoads(prev => 
+      prev.includes(road) ? prev.filter(r => r !== road) : [...prev, road]
+    );
+  };
+
   const listings = [
+    // ... (existing featured listings)
     {
       id: 1,
       image: '/property_land_1.png',
@@ -32,36 +43,6 @@ const Properties = () => {
       location: 'Kubiiri Roundabout Area',
       price: 'Flexible Payment Plan',
       features: ['Secure neighborhood', 'Clear documentation', 'Ready for immediate transfer']
-    },
-    {
-      id: 4,
-      image: '/property_land_1.png',
-      status: 'For Sale',
-      type: 'Private Mailo Land',
-      title: 'Commercial Frontage Plot',
-      location: 'Main Road Frontage',
-      price: 'Flexible Payment Plan',
-      features: ['High traffic area', 'Ideal for business', 'Verified title']
-    },
-    {
-      id: 5,
-      image: '/hero_background.png',
-      status: 'Sold Out',
-      type: 'Freehold Land',
-      title: 'Scenic View Plot',
-      location: 'Suburbs of Kampala',
-      price: 'Sold',
-      features: ['Great views', 'Serene environment']
-    },
-    {
-      id: 6,
-      image: '/exc.jpeg',
-      status: 'Available',
-      type: 'Private Mailo Land',
-      title: 'Affordable Residential Plots',
-      location: 'Emerging Neighborhood',
-      price: 'Installments Available',
-      features: ['Fast developing', 'Good investment', 'Surveyed']
     }
   ];
 
@@ -69,36 +50,18 @@ const Properties = () => {
     <div className="properties-page">
       <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(11, 34, 57, 0.8), rgba(11, 34, 57, 0.8)), url("/hero_background.png")' }}>
         <div className="container">
-          <h1 className="page-title animate-fade-in">Land Listings</h1>
-          <p className="page-subtitle animate-fade-in">Find your perfect plot in Uganda</p>
+          <h1 className="page-title animate-fade-in">Estate Catalog</h1>
+          <p className="page-subtitle animate-fade-in">Over 80 Estates in Stock Across 7 Main Road Corridors</p>
         </div>
       </div>
 
+      {/* Featured Section */}
       <section className="section bg-light">
         <div className="container">
-          <div className="filter-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', padding: '20px', backgroundColor: 'white', borderRadius: '8px', boxShadow: 'var(--shadow-sm)' }}>
-            <p style={{ fontWeight: '500', color: 'var(--text-light)' }}>Showing {listings.length} Properties</p>
-            <div className="filter-options" style={{ display: 'flex', gap: '15px' }}>
-              <select style={{ padding: '10px', borderRadius: '4px', border: '1px solid var(--border-color)', outline: 'none', fontFamily: 'inherit' }}>
-                <option>All Land Types</option>
-                <option>Private Mailo</option>
-                <option>Kabaka Land</option>
-                <option>Freehold Land</option>
-              </select>
-              <select style={{ padding: '10px', borderRadius: '4px', border: '1px solid var(--border-color)', outline: 'none', fontFamily: 'inherit' }}>
-                <option>All Locations</option>
-                <option>Gayaza road</option>
-                <option>Hoima road</option>
-                <option>Jinja road</option>
-                <option>Masaka road</option>
-                <option>Mityana road</option>
-                <option>Entebbe road</option>
-                <option>Bombo road</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="properties-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px' }}>
+          <h2 className="section-title">Featured Highlights</h2>
+          <p className="section-subtitle">A selection of our prime property listings ready for development.</p>
+          
+          <div className="properties-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px' }}>
             {listings.map((property) => (
               <div key={property.id} className="property-card" style={{ background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: 'var(--shadow-md)', transition: 'var(--transition)' }}>
                 <div style={{ position: 'relative', height: '240px' }}>
@@ -118,32 +81,92 @@ const Properties = () => {
                     <MapPin size={16} /> {property.location}
                   </p>
                   
-                  <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '15px', marginBottom: '20px' }}>
-                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.85rem', color: 'var(--text-light)' }}>
-                      {property.features.map((feature, idx) => (
-                        <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <div style={{ width: '4px', height: '4px', backgroundColor: 'var(--primary-blue)', borderRadius: '50%' }}></div>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  {property.status !== 'Sold Out' ? (
-                    <Link to="/contact" className="btn btn-primary" style={{ display: 'flex', width: '100%' }}>Inquire About This Plot</Link>
-                  ) : (
-                    <button disabled className="btn btn-outline" style={{ width: '100%', opacity: '0.5', cursor: 'not-allowed' }}>Sold</button>
-                  )}
+                  <Link to="/contact" className="btn btn-primary" style={{ display: 'flex', width: '100%' }}>Inquire Now</Link>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-light)', marginBottom: '20px' }}>Don't see what you're looking for?</p>
-            <Link to="/contact" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '10px' }}>
-              <Phone size={18} /> Contact our agents for more options
-            </Link>
+      {/* 2025 Estate Update (Accordion Style) */}
+      <section className="section bg-white">
+        <div className="container">
+          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+            <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>New Estate Update 2025J</span>
+            <h2 className="section-title">Comprehensive Price List</h2>
+            <p className="section-subtitle">Examine our wide selection of estates grouped by major road access.</p>
+          </div>
+
+          <div className="estate-accordion">
+            {Object.entries(estatesData).map(([road, estates]) => (
+              <div key={road} className="accordion-item" style={{ marginBottom: '15px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
+                <button 
+                  onClick={() => toggleRoad(road)}
+                  style={{ 
+                    width: '100%', 
+                    padding: '20px 25px', 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center', 
+                    background: expandedRoads.includes(road) ? 'var(--primary-blue)' : 'white',
+                    color: expandedRoads.includes(road) ? 'white' : 'var(--primary-blue)',
+                    border: 'none',
+                    borderRadius: expandedRoads.includes(road) ? '8px 8px 0 0' : '8px',
+                    cursor: 'pointer',
+                    transition: 'var(--transition)'
+                  }}
+                >
+                  <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{road}</span>
+                  {expandedRoads.includes(road) ? <ChevronUp /> : <ChevronDown />}
+                </button>
+                
+                {expandedRoads.includes(road) && (
+                  <div className="accordion-content" style={{ padding: '0 25px 25px' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px', marginTop: '20px' }}>
+                      {estates.map((estate, i) => (
+                        <div key={i} style={{ padding: '15px', background: '#f8fafc', borderRadius: '6px', border: '1px solid #edf2f7' }}>
+                          <h4 style={{ color: 'var(--primary-blue)', marginBottom: '5px', fontSize: '1rem' }}>{estate.name}</h4>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ color: 'var(--accent-gold)', fontWeight: '700', fontSize: '1.1rem' }}>{estate.price}</span>
+                            <span style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>{estate.distance}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* General Information Section */}
+      <section className="section bg-light-alt" style={{ backgroundColor: '#f0f4f7' }}>
+        <div className="container">
+          <div className="info-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
+            <div className="info-item" style={{ textAlign: 'center', padding: '30px', background: 'white', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
+              <Ruler className="mb-3" color="var(--accent-gold)" size={40} style={{ margin: '0 auto' }} />
+              <h4 style={{ color: 'var(--primary-blue)', marginBottom: '10px' }}>Plot Dimensions</h4>
+              <p style={{ color: 'var(--text-light)' }}>Our standard plots measure <strong>100 by 50fts</strong>. Perfect for residential or light commercial development.</p>
+            </div>
+            <div className="info-item" style={{ textAlign: 'center', padding: '30px', background: 'white', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
+              <Clock className="mb-3" color="var(--accent-gold)" size={40} style={{ margin: '0 auto' }} />
+              <h4 style={{ color: 'var(--primary-blue)', marginBottom: '10px' }}>Payment Plans</h4>
+              <p style={{ color: 'var(--text-light)' }}>Flexible installments available. Pay <strong>50% deposit</strong> and the balance within <strong>4 months</strong>.</p>
+            </div>
+            <div className="info-item" style={{ textAlign: 'center', padding: '30px', background: 'white', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
+              <Landmark className="mb-3" color="var(--accent-gold)" size={40} style={{ margin: '0 auto' }} />
+              <h4 style={{ color: 'var(--primary-blue)', marginBottom: '10px' }}>Financing Options</h4>
+              <p style={{ color: 'var(--text-light)' }}>We accept Bank financing, Full cash payments, and structured installment plans to suit your budget.</p>
+            </div>
+          </div>
+          
+          <div style={{ marginTop: '60px', textAlign: 'center', padding: '40px', background: 'var(--primary-blue)', borderRadius: '12px', color: 'white' }}>
+            <h3 style={{ color: 'white', marginBottom: '15px' }}>Ready to Inspect?</h3>
+            <p style={{ opacity: '0.9', marginBottom: '30px' }}>Inspection is strictly by appointment. All our titled plots have ready land titles available for verification.</p>
+            <Link to="/contact" className="btn btn-accent">Book Appointment Now</Link>
           </div>
         </div>
       </section>
