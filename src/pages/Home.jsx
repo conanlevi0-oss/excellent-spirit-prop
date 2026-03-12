@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Shield, Building2, Map, MapPin } from 'lucide-react';
+import { ArrowRight, Star, Shield, Building2, Map, MapPin, CheckCircle2 } from 'lucide-react';
 import './Home.css';
 
 const Home = () => {
@@ -67,32 +67,32 @@ const Home = () => {
           <p className="section-subtitle">The pillars that define our service excellence and professional conduct.</p>
           <div className="values-grid">
             <div className="value-card">
-              <span className="value-number">01</span>
+              <CheckCircle2 size={32} color="var(--accent-gold)" className="value-icon" />
               <h3>Christ Centeredness</h3>
               <p>Everything we do is built on the foundation of our faith and Christian values.</p>
             </div>
             <div className="value-card">
-              <span className="value-number">02</span>
+              <CheckCircle2 size={32} color="var(--accent-gold)" className="value-icon" />
               <h3>Stewardship</h3>
               <p>We believe in responsible management of the resources and land entrusted to us.</p>
             </div>
             <div className="value-card">
-              <span className="value-number">03</span>
+              <CheckCircle2 size={32} color="var(--accent-gold)" className="value-icon" />
               <h3>Professionalism</h3>
               <p>We maintain the highest standards of service and conduct in every transaction.</p>
             </div>
             <div className="value-card">
-              <span className="value-number">04</span>
+              <CheckCircle2 size={32} color="var(--accent-gold)" className="value-icon" />
               <h3>Servanthood</h3>
               <p>We are here to serve our clients' needs with humility and dedication.</p>
             </div>
             <div className="value-card">
-              <span className="value-number">05</span>
+              <CheckCircle2 size={32} color="var(--accent-gold)" className="value-icon" />
               <h3>Diligence</h3>
               <p>We are thorough and persistent in ensuring every land title and deal is verified.</p>
             </div>
             <div className="value-card">
-              <span className="value-number">06</span>
+              <CheckCircle2 size={32} color="var(--accent-gold)" className="value-icon" />
               <h3>Integrity</h3>
               <p>Honesty and transparency are at the core of our business dealings.</p>
             </div>

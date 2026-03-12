@@ -31,12 +31,12 @@ const AboutUs = () => {
               <h3 style={{ color: 'var(--primary-blue)', margin: '40px 0 20px', fontFamily: '"Playfair Display", serif', fontSize: '1.8rem' }}>Core Values</h3>
               <ul className="values-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
                 {[
-                  'Christ-centeredness',
+                  'Christ Centeredness',
                   'Stewardship',
-                  'Integrity',
-                  'Diligence',
                   'Professionalism',
-                  'Transparency'
+                  'Servanthood',
+                  'Diligence',
+                  'Integrity'
                 ].map((value, index) => (
                   <li key={index} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '1.1rem', fontWeight: '500' }}>
                     <CheckCircle2 size={20} color="var(--accent-gold)" />
