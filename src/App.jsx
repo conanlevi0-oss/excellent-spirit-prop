@@ -7,6 +7,7 @@ import AboutUs from './pages/AboutUs';
 import Services from './pages/Services';
 import Properties from './pages/Properties';
 import Contact from './pages/Contact';
+import Team from './pages/Team';
 import { MessageCircle } from 'lucide-react';
 import './index.css';
 
@@ -22,6 +23,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/services" element={<Services />} />
             <Route path="/properties" element={<Properties />} />
+            <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

@@ -57,6 +57,11 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
+            <NavLink to="/team" className={({isActive}) => isActive ? "active-link" : ""} onClick={toggleMenu}>
+              Our Team
+            </NavLink>
+          </li>
+          <li>
             <NavLink to="/contact" className={({isActive}) => isActive ? "active-link" : ""} onClick={toggleMenu}>
               Contact
             </NavLink>
