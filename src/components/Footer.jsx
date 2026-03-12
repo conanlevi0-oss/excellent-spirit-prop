@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container footer-content">
         <div className="footer-col brand-col">
           <div className="footer-logo">
-            <img src="/excellent.jpeg" alt="Excellent Spirit Property Masters Ltd" />
+            <img src="/exc.jpeg" alt="Excellent Spirit Property Masters Ltd" />
             <h3>Excellent Spirit</h3>
           </div>
           <p className="footer-desc">

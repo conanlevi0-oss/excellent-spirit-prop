@@ -24,7 +24,7 @@ const Navbar = () => {
       
       <nav className="navbar container">
         <Link to="/" className="navbar-logo">
-          <img src="/excellent.jpeg" alt="Excellent Spirit Property Masters Ltd Logo" />
+          <img src="/exc.jpeg" alt="Excellent Spirit Property Masters Ltd Logo" />
           <div className="logo-text">
             <h2>Excellent Spirit</h2>
             <span>Property Masters Ltd</span>

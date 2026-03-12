@@ -25,7 +25,7 @@ const Properties = () => {
     },
     {
       id: 3,
-      image: '/excellent.jpeg',
+      image: '/exc.jpeg',
       status: 'Available',
       type: 'Freehold Land',
       title: 'Residential Plot near Amenities',
@@ -55,7 +55,7 @@ const Properties = () => {
     },
     {
       id: 6,
-      image: '/excellent.jpeg',
+      image: '/exc.jpeg',
       status: 'Available',
       type: 'Private Mailo Land',
       title: 'Affordable Residential Plots',
@@ -77,13 +77,23 @@ const Properties = () => {
       <section className="section bg-light">
         <div className="container">
           <div className="filter-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', padding: '20px', backgroundColor: 'white', borderRadius: '8px', boxShadow: 'var(--shadow-sm)' }}>
-            <p style={{ fontWeight: '500', color: 'var(--text-light)' }}>Showing 6 Properties</p>
+            <p style={{ fontWeight: '500', color: 'var(--text-light)' }}>Showing {listings.length} Properties</p>
             <div className="filter-options" style={{ display: 'flex', gap: '15px' }}>
               <select style={{ padding: '10px', borderRadius: '4px', border: '1px solid var(--border-color)', outline: 'none', fontFamily: 'inherit' }}>
                 <option>All Land Types</option>
                 <option>Private Mailo</option>
                 <option>Kabaka Land</option>
                 <option>Freehold Land</option>
+              </select>
+              <select style={{ padding: '10px', borderRadius: '4px', border: '1px solid var(--border-color)', outline: 'none', fontFamily: 'inherit' }}>
+                <option>All Locations</option>
+                <option>Gayaza road</option>
+                <option>Hoima road</option>
+                <option>Jinja road</option>
+                <option>Masaka road</option>
+                <option>Mityana road</option>
+                <option>Entebbe road</option>
+                <option>Bombo road</option>
               </select>
             </div>
           </div>

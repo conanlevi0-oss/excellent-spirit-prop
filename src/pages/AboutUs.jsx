@@ -16,7 +16,7 @@ const AboutUs = () => {
         <div className="container">
           <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', gap: '60px', alignItems: 'center' }}>
             <div className="about-images">
-              <img src="/excellent.jpeg" alt="Excellent Spirit Offices" style={{ width: '100%', borderRadius: '8px', boxShadow: 'var(--shadow-lg)' }} />
+              <img src="/exc.jpeg" alt="Excellent Spirit Offices" style={{ width: '100%', borderRadius: '8px', boxShadow: 'var(--shadow-lg)' }} />
             </div>
             
             <div className="about-text">

@@ -42,7 +42,7 @@ const Services = () => {
         "Search and verification of titles",
         "Comprehensive documentation support"
       ],
-      image: "/excellent.jpeg"
+      image: "/exc.jpeg"
     },
     {
       id: "financing",

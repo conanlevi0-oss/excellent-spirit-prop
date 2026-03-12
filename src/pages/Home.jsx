@@ -50,7 +50,7 @@ const Home = () => {
             <Link to="/about" className="btn btn-primary mt-4">More About Us</Link>
           </div>
           <div className="intro-image-wrapper">
-            <img src="/excellent.jpeg" alt="Excellent Spirit" className="intro-image" />
+            <img src="/exc.jpeg" alt="Excellent Spirit" className="intro-image" />
             <div className="experience-badge">
               <span>Trusted Christian</span>
               <strong>Real Estate</strong>
