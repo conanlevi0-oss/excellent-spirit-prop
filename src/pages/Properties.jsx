@@ -1,4 +1,4 @@
-import { MapPin, Phone, ChevronDown, ChevronUp, DollarSign, Ruler, Clock, Landmark } from 'lucide-react';
+import { MapPin, Phone, ChevronDown, ChevronUp, Ruler, Clock, Landmark, Share2, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { estatesData } from '../data/estates';
@@ -74,57 +74,62 @@ const Properties = () => {
           </div>
 
           <div className="estate-tables">
-            {/* 2026 Stock - Table View */}
             {Object.entries(estatesData)
               .filter(([road]) => road === "Excellent Spirit Stock as of 2026")
               .map(([road, estates]) => (
-              <div key={road} className="road-section" style={{ marginBottom: '50px' }}>
-                <h3 style={{ 
-                  background: 'var(--primary-blue)', 
-                  color: 'white', 
-                  padding: '15px 25px', 
-                  borderRadius: '8px 8px 0 0',
-                  margin: 0,
-                  fontSize: '1.2rem',
-                  fontFamily: '"Playfair Display", serif'
-                }}>
-                  {road}
-                </h3>
-                <div style={{ overflowX: 'auto', border: '1px solid var(--border-color)', borderRadius: '0 0 8px 8px' }}>
-                  <table className="estate-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
-                    <thead>
-                      <tr style={{ background: '#f58220', color: 'white' }}>
-                        <th className="table-header-cell">Estate Name</th>
-                        <th className="table-header-cell">Price</th>
-                        <th className="table-header-cell">Distance</th>
-                        <th className="table-header-cell">Deposit (70%)</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {estates.slice(0, 10).map((estate, i) => {
-                        // Helper to calculate deposit
-                        const calculateDeposit = (priceStr) => {
-                          if (estate.deposit) return estate.deposit;
-                          const match = priceStr.match(/(\d+(\.\d+)?)/);
-                          if (match) {
-                            const val = parseFloat(match[1]);
-                            const dep = (val * 0.7).toFixed(1);
-                            return `${dep}${priceStr.includes('M') || priceStr.includes('m') ? 'M' : ''}`;
-                          }
-                          return "-";
-                        };
+              <div key={road} className="premium-stock-section" style={{ marginBottom: '60px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
+                  {estates.slice(0, 9).map((estate, i) => (
+                    <div key={i} className="property-card premium-card" style={{ 
+                      background: 'white', 
+                      borderRadius: '16px', 
+                      overflow: 'hidden', 
+                      boxShadow: '0 10px 25px rgba(0,0,0,0.05)', 
+                      transition: 'all 0.3s ease',
+                      border: '1px solid #f1f5f9',
+                      position: 'relative'
+                    }}>
+                      {/* Property Image */}
+                      <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                        <img 
+                          src={estate.image || '/exc.jpeg'} 
+                          alt={estate.name} 
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
+                          className="card-img"
+                        />
+                        <div style={{ position: 'absolute', top: '15px', right: '15px', display: 'flex', gap: '8px' }}>
+                          <button style={{ background: 'rgba(255,255,255,0.9)', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer', color: 'var(--primary-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                            <Share2 size={18} />
+                          </button>
+                          <button style={{ background: 'rgba(255,255,255,0.9)', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                            <Heart size={18} />
+                          </button>
+                        </div>
+                        <div style={{ position: 'absolute', bottom: '15px', left: '15px', background: 'var(--accent-gold)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>
+                          2026 Stock
+                        </div>
+                      </div>
 
-                        return (
-                          <tr key={i} style={{ borderBottom: '1px solid #edf2f7', background: i % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
-                            <td className="table-body-cell" style={{ color: 'var(--primary-blue)', fontWeight: '600' }}>{i + 1}. {estate.name.toUpperCase()}</td>
-                            <td className="table-body-cell" style={{ color: 'var(--accent-gold)', fontWeight: '700' }}>{estate.price.toUpperCase()}</td>
-                            <td className="table-body-cell" style={{ color: 'var(--text-light)' }}>{estate.distance.toUpperCase()}</td>
-                            <td className="table-body-cell" style={{ color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                      {/* Property Details */}
+                      <div style={{ padding: '25px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                          <span style={{ color: 'var(--accent-gold)', fontWeight: '800', fontSize: '1.4rem' }}>{estate.price}</span>
+                          <span style={{ fontSize: '0.8rem', color: 'var(--text-light)', background: '#f8fafc', padding: '4px 10px', borderRadius: '20px', fontWeight: '600' }}>{estate.distance}</span>
+                        </div>
+                        <h3 style={{ color: 'var(--primary-blue)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: '700', fontFamily: '"Inter", sans-serif' }}>{estate.name.toUpperCase()}</h3>
+                        <p style={{ color: 'var(--text-light)', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '20px' }}>
+                          {estate.description}
+                        </p>
+                        
+                        <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--primary-blue)', fontSize: '0.85rem', fontWeight: '600' }}>
+                            <Phone size={14} /> <span>Inquire Now</span>
+                          </div>
+                          <Link to="/contact" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>View Details</Link>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
@@ -270,7 +275,10 @@ const Properties = () => {
         }
         .property-card:hover {
           transform: translateY(-5px);
-          box-shadow: var(--shadow-lg) !important;
+          box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+        }
+        .property-card:hover .card-img {
+          transform: scale(1.1);
         }
         .table-header-cell {
           padding: 15px 20px;
