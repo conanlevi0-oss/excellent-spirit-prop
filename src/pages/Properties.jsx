@@ -55,40 +55,6 @@ const Properties = () => {
         </div>
       </div>
 
-      {/* Featured Section */}
-      <section className="section bg-light">
-        <div className="container">
-          <h2 className="section-title">Featured Highlights</h2>
-          <p className="section-subtitle">A selection of our prime property listings ready for development.</p>
-          
-          <div className="properties-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px' }}>
-            {listings.map((property) => (
-              <div key={property.id} className="property-card" style={{ background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: 'var(--shadow-md)', transition: 'var(--transition)' }}>
-                <div style={{ position: 'relative', height: '240px' }}>
-                  <img src={property.image} alt={property.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span style={{ position: 'absolute', top: '15px', right: '15px', background: property.status === 'Sold Out' ? '#e53e3e' : 'var(--accent-gold)', color: 'white', padding: '6px 12px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '600' }}>
-                    {property.status}
-                  </span>
-                  <span style={{ position: 'absolute', bottom: '15px', left: '15px', background: 'rgba(11, 34, 57, 0.8)', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: '500' }}>
-                    {property.type}
-                  </span>
-                </div>
-                
-                <div style={{ padding: '25px' }}>
-                  <div style={{ color: 'var(--accent-gold)', fontWeight: '700', fontSize: '1.1rem', marginBottom: '10px' }}>{property.price}</div>
-                  <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', marginBottom: '15px', color: 'var(--primary-blue)' }}>{property.title}</h3>
-                  <p style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-light)', marginBottom: '20px', fontSize: '0.9rem' }}>
-                    <MapPin size={16} /> {property.location}
-                  </p>
-                  
-                  <Link to="/contact" className="btn btn-primary" style={{ display: 'flex', width: '100%' }}>Inquire Now</Link>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* 2025 Estate Update (Accordion Style) */}
       <section className="section bg-white">
         <div className="container">
@@ -145,6 +111,40 @@ const Properties = () => {
                     </div>
                   </div>
                 )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Section */}
+      <section className="section bg-light">
+        <div className="container">
+          <h2 className="section-title">Featured Highlights</h2>
+          <p className="section-subtitle">A selection of our prime property listings ready for development.</p>
+          
+          <div className="properties-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px' }}>
+            {listings.map((property) => (
+              <div key={property.id} className="property-card" style={{ background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: 'var(--shadow-md)', transition: 'var(--transition)' }}>
+                <div style={{ position: 'relative', height: '240px' }}>
+                  <img src={property.image} alt={property.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <span style={{ position: 'absolute', top: '15px', right: '15px', background: property.status === 'Sold Out' ? '#e53e3e' : 'var(--accent-gold)', color: 'white', padding: '6px 12px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '600' }}>
+                    {property.status}
+                  </span>
+                  <span style={{ position: 'absolute', bottom: '15px', left: '15px', background: 'rgba(11, 34, 57, 0.8)', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: '500' }}>
+                    {property.type}
+                  </span>
+                </div>
+                
+                <div style={{ padding: '25px' }}>
+                  <div style={{ color: 'var(--accent-gold)', fontWeight: '700', fontSize: '1.1rem', marginBottom: '10px' }}>{property.price}</div>
+                  <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', marginBottom: '15px', color: 'var(--primary-blue)' }}>{property.title}</h3>
+                  <p style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-light)', marginBottom: '20px', fontSize: '0.9rem' }}>
+                    <MapPin size={16} /> {property.location}
+                  </p>
+                  
+                  <Link to="/contact" className="btn btn-primary" style={{ display: 'flex', width: '100%' }}>Inquire Now</Link>
+                </div>
               </div>
             ))}
           </div>
