@@ -134,10 +134,7 @@
     position: fixed;
     top: 110px; /* Adjust according to top bar + navbar height */
     left: -100%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
     background-color: var(--bg-white);
     width: 100%;
     padding: 0;
