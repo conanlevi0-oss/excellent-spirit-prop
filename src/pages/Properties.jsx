@@ -51,7 +51,7 @@ const Properties = () => {
       <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(11, 34, 57, 0.8), rgba(11, 34, 57, 0.8)), url("/hero_background.png")' }}>
         <div className="container">
           <h1 className="page-title animate-fade-in">Estate Catalog</h1>
-          <p className="page-subtitle animate-fade-in">Over 80 Estates in Stock Across 7 Main Road Corridors</p>
+          <p className="page-subtitle animate-fade-in">Premium Real Estate Stock & Investment Opportunities</p>
         </div>
       </div>
 
