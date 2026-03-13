@@ -100,7 +100,7 @@ const Properties = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {estates.map((estate, i) => {
+                      {estates.slice(0, 10).map((estate, i) => {
                         // Helper to calculate deposit if not present
                         const calculateDeposit = (priceStr) => {
                           if (estate.deposit) return estate.deposit;
@@ -127,6 +127,13 @@ const Properties = () => {
                       })}
                     </tbody>
                   </table>
+                  {estates.length > 10 && (
+                    <div style={{ padding: '15px 20px', background: '#f8fafc', textAlign: 'center', borderTop: '1px solid var(--border-color)' }}>
+                      <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-gold)', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                        View {estates.length - 10} more estates in PDF <ChevronDown size={16} style={{ transform: 'rotate(-90deg)' }} />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
