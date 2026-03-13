@@ -59,7 +59,7 @@ const Properties = () => {
       <section className="section bg-white">
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>New Estate Update 2025J</span>
+            <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>New Estate Update 2025</span>
             <h2 className="section-title">Comprehensive Price List</h2>
             <p className="section-subtitle">Examine our wide selection of estates grouped by major road access.</p>
             
