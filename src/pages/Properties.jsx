@@ -74,7 +74,10 @@ const Properties = () => {
           </div>
 
           <div className="estate-tables">
-            {Object.entries(estatesData).map(([road, estates]) => (
+            {/* 2026 Stock - Table View */}
+            {Object.entries(estatesData)
+              .filter(([road]) => road === "Excellent Spirit Stock as of 2026")
+              .map(([road, estates]) => (
               <div key={road} className="road-section" style={{ marginBottom: '50px' }}>
                 <h3 style={{ 
                   background: 'var(--primary-blue)', 
@@ -94,22 +97,19 @@ const Properties = () => {
                         <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Estate Name</th>
                         <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Price</th>
                         <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Distance</th>
-                        {road === "Excellent Spirit Stock as of 2026" && (
-                          <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Deposit (70%)</th>
-                        )}
+                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Deposit (70%)</th>
                       </tr>
                     </thead>
                     <tbody>
                       {estates.slice(0, 10).map((estate, i) => {
-                        // Helper to calculate deposit if not present
+                        // Helper to calculate deposit
                         const calculateDeposit = (priceStr) => {
                           if (estate.deposit) return estate.deposit;
-                          // Extract number from price like "10m" or "from 9m"
                           const match = priceStr.match(/(\d+(\.\d+)?)/);
                           if (match) {
                             const val = parseFloat(match[1]);
                             const dep = (val * 0.7).toFixed(1);
-                            return `${dep}${priceStr.includes('m') ? 'm' : ''}`;
+                            return `${dep}${priceStr.includes('M') || priceStr.includes('m') ? 'M' : ''}`;
                           }
                           return "-";
                         };
@@ -119,24 +119,68 @@ const Properties = () => {
                             <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '600' }}>{i + 1}. {estate.name.toUpperCase()}</td>
                             <td style={{ padding: '15px 20px', color: 'var(--accent-gold)', fontWeight: '700' }}>{estate.price.toUpperCase()}</td>
                             <td style={{ padding: '15px 20px', fontSize: '0.9rem', color: 'var(--text-light)' }}>{estate.distance.toUpperCase()}</td>
-                            {road === "Excellent Spirit Stock as of 2026" && (
-                              <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
-                            )}
+                            <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
                           </tr>
                         );
                       })}
                     </tbody>
                   </table>
-                  {estates.length > 10 && (
-                    <div style={{ padding: '15px 20px', background: '#f8fafc', textAlign: 'center', borderTop: '1px solid var(--border-color)' }}>
-                      <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-gold)', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                        View {estates.length - 10} more estates in PDF <ChevronDown size={16} style={{ transform: 'rotate(-90deg)' }} />
-                      </a>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
+
+            {/* Other Estates - Accordion/List View */}
+            <div className="other-estates" style={{ marginTop: '30px' }}>
+              <h2 style={{ color: 'var(--primary-blue)', marginBottom: '30px', borderBottom: '2px solid var(--accent-gold)', display: 'inline-block', paddingBottom: '10px' }}>Our Established Estates</h2>
+              {Object.entries(estatesData)
+                .filter(([road]) => road !== "Excellent Spirit Stock as of 2026")
+                .map(([road, estates]) => (
+                <div key={road} className="accordion-item" style={{ marginBottom: '15px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
+                  <button 
+                    onClick={() => toggleRoad(road)}
+                    style={{ 
+                      width: '100%', 
+                      padding: '20px 25px', 
+                      display: 'flex', 
+                      justifyContent: 'space-between', 
+                      alignItems: 'center', 
+                      background: expandedRoads.includes(road) ? 'var(--primary-blue)' : 'white',
+                      color: expandedRoads.includes(road) ? 'white' : 'var(--primary-blue)',
+                      border: 'none',
+                      borderRadius: expandedRoads.includes(road) ? '8px 8px 0 0' : '8px',
+                      cursor: 'pointer',
+                      transition: 'var(--transition)'
+                    }}
+                  >
+                    <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{road.toUpperCase()}</span>
+                    {expandedRoads.includes(road) ? <ChevronUp /> : <ChevronDown />}
+                  </button>
+                  
+                  {expandedRoads.includes(road) && (
+                    <div className="accordion-content" style={{ padding: '25px', background: '#f8fafc' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+                        {estates.map((estate, i) => (
+                          <div key={i} style={{ padding: '20px', background: 'white', borderRadius: '12px', border: '1px solid #edf2f7', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
+                            <h4 style={{ color: 'var(--primary-blue)', marginBottom: '12px', fontSize: '1.1rem', fontWeight: '700' }}>{i + 1}. {estate.name.toUpperCase()}</h4>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                              <span style={{ color: 'var(--accent-gold)', fontWeight: '800', fontSize: '1.2rem' }}>{estate.price.toUpperCase()}</span>
+                              <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', background: '#f1f5f9', padding: '4px 10px', borderRadius: '20px' }}>{estate.distance.toUpperCase()}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      {estates.length > 10 && (
+                        <div style={{ marginTop: '25px', textAlign: 'center' }}>
+                          <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-gold)', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                            View more in PDF <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} />
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
