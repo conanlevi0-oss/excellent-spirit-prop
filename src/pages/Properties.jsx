@@ -94,10 +94,10 @@ const Properties = () => {
                   <table className="estate-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                     <thead>
                       <tr style={{ background: '#f58220', color: 'white' }}>
-                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Estate Name</th>
-                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Price</th>
-                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Distance</th>
-                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Deposit (70%)</th>
+                        <th className="table-header-cell">Estate Name</th>
+                        <th className="table-header-cell">Price</th>
+                        <th className="table-header-cell">Distance</th>
+                        <th className="table-header-cell">Deposit (70%)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -116,10 +116,10 @@ const Properties = () => {
 
                         return (
                           <tr key={i} style={{ borderBottom: '1px solid #edf2f7', background: i % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
-                            <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '600' }}>{i + 1}. {estate.name.toUpperCase()}</td>
-                            <td style={{ padding: '15px 20px', color: 'var(--accent-gold)', fontWeight: '700' }}>{estate.price.toUpperCase()}</td>
-                            <td style={{ padding: '15px 20px', fontSize: '0.9rem', color: 'var(--text-light)' }}>{estate.distance.toUpperCase()}</td>
-                            <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
+                            <td className="table-body-cell" style={{ color: 'var(--primary-blue)', fontWeight: '600' }}>{i + 1}. {estate.name.toUpperCase()}</td>
+                            <td className="table-body-cell" style={{ color: 'var(--accent-gold)', fontWeight: '700' }}>{estate.price.toUpperCase()}</td>
+                            <td className="table-body-cell" style={{ color: 'var(--text-light)' }}>{estate.distance.toUpperCase()}</td>
+                            <td className="table-body-cell" style={{ color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
                           </tr>
                         );
                       })}
@@ -272,9 +272,41 @@ const Properties = () => {
           transform: translateY(-5px);
           box-shadow: var(--shadow-lg) !important;
         }
+        .table-header-cell {
+          padding: 15px 20px;
+          font-weight: 700;
+          text-transform: uppercase;
+          fontSize: 0.85rem;
+        }
+        .table-body-cell {
+          padding: 15px 20px;
+          font-size: 0.9rem;
+        }
         @media (max-width: 768px) {
           .page-title { font-size: 2.5rem; }
           .filter-bar { flex-direction: column; gap: 15px; align-items: flex-start !important; }
+          .table-header-cell {
+            padding: 10px 8px;
+            font-size: 0.65rem;
+          }
+          .table-body-cell {
+            padding: 10px 8px;
+            font-size: 0.7rem;
+          }
+          .road-section h3 {
+            font-size: 1rem !important;
+            padding: 10px 15px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .table-header-cell {
+            font-size: 0.55rem;
+            padding: 8px 4px;
+          }
+          .table-body-cell {
+            font-size: 0.6rem;
+            padding: 8px 4px;
+          }
         }
       `}</style>
     </div>
