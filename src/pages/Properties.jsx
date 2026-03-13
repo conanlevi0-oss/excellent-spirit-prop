@@ -94,7 +94,9 @@ const Properties = () => {
                         <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Estate Name</th>
                         <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Price</th>
                         <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Distance</th>
-                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Deposit (70%)</th>
+                        {road === "Excellent Spirit Stock as of 2026" && (
+                          <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Deposit (70%)</th>
+                        )}
                       </tr>
                     </thead>
                     <tbody>
@@ -117,7 +119,9 @@ const Properties = () => {
                             <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '600' }}>{i + 1}. {estate.name.toUpperCase()}</td>
                             <td style={{ padding: '15px 20px', color: 'var(--accent-gold)', fontWeight: '700' }}>{estate.price.toUpperCase()}</td>
                             <td style={{ padding: '15px 20px', fontSize: '0.9rem', color: 'var(--text-light)' }}>{estate.distance.toUpperCase()}</td>
-                            <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
+                            {road === "Excellent Spirit Stock as of 2026" && (
+                              <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
+                            )}
                           </tr>
                         );
                       })}
