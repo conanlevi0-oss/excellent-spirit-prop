@@ -134,42 +134,21 @@
     position: fixed;
     top: 110px; /* Adjust according to top bar + navbar height */
     left: -100%;
-    align-items: center;
+    flex-direction: column;
     background-color: var(--bg-white);
     width: 100%;
-    padding: 0;
+    height: calc(100vh - 110px);
+    padding: 40px 20px;
     transition: var(--transition);
     box-shadow: var(--shadow-md);
-    height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
   }
 
   .nav-links.active {
-    height: calc(100vh - 110px);
-    padding: 40px 20px;
-    opacity: 1;
-    visibility: visible;
     left: 0;
   }
 
   .nav-links li {
     width: 100%;
     text-align: center;
-    margin: 10px 0;
-  }
-
-  .nav-cta {
-    width: 100%;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .nav-cta a {
-    width: 100%;
-    max-width: 250px;
-    justify-content: center;
   }
 }
