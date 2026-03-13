@@ -55,11 +55,11 @@ const Properties = () => {
         </div>
       </div>
 
-      {/* 2025 Estate Update (Accordion Style) */}
+      {/* 2025 Estate Update (Table Style) */}
       <section className="section bg-white">
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>New Estate Update 2025</span>
+            <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Excelent Spirit Stock as of 2026</span>
             <h2 className="section-title">Comprehensive Price List</h2>
             <p className="section-subtitle">Examine our wide selection of estates grouped by major road access.</p>
             
@@ -73,44 +73,57 @@ const Properties = () => {
             </div>
           </div>
 
-          <div className="estate-accordion">
+          <div className="estate-tables">
             {Object.entries(estatesData).map(([road, estates]) => (
-              <div key={road} className="accordion-item" style={{ marginBottom: '15px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
-                <button 
-                  onClick={() => toggleRoad(road)}
-                  style={{ 
-                    width: '100%', 
-                    padding: '20px 25px', 
-                    display: 'flex', 
-                    justifyContent: 'space-between', 
-                    alignItems: 'center', 
-                    background: expandedRoads.includes(road) ? 'var(--primary-blue)' : 'white',
-                    color: expandedRoads.includes(road) ? 'white' : 'var(--primary-blue)',
-                    border: 'none',
-                    borderRadius: expandedRoads.includes(road) ? '8px 8px 0 0' : '8px',
-                    cursor: 'pointer',
-                    transition: 'var(--transition)'
-                  }}
-                >
-                  <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{road}</span>
-                  {expandedRoads.includes(road) ? <ChevronUp /> : <ChevronDown />}
-                </button>
-                
-                {expandedRoads.includes(road) && (
-                  <div className="accordion-content" style={{ padding: '0 25px 25px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '15px', marginTop: '20px' }}>
-                      {estates.map((estate, i) => (
-                        <div key={i} style={{ padding: '15px', background: '#f8fafc', borderRadius: '6px', border: '1px solid #edf2f7' }}>
-                          <h4 style={{ color: 'var(--primary-blue)', marginBottom: '5px', fontSize: '1rem' }}>{estate.name}</h4>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span style={{ color: 'var(--accent-gold)', fontWeight: '700', fontSize: '1.1rem' }}>{estate.price}</span>
-                            <span style={{ fontSize: '0.8rem', color: 'var(--text-light)' }}>{estate.distance}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+              <div key={road} className="road-section" style={{ marginBottom: '50px' }}>
+                <h3 style={{ 
+                  background: 'var(--primary-blue)', 
+                  color: 'white', 
+                  padding: '15px 25px', 
+                  borderRadius: '8px 8px 0 0',
+                  margin: 0,
+                  fontSize: '1.2rem',
+                  fontFamily: '"Playfair Display", serif'
+                }}>
+                  {road}
+                </h3>
+                <div style={{ overflowX: 'auto', border: '1px solid var(--border-color)', borderRadius: '0 0 8px 8px' }}>
+                  <table className="estate-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+                    <thead>
+                      <tr style={{ background: '#f58220', color: 'white' }}>
+                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Estate Name</th>
+                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Price</th>
+                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Distance</th>
+                        <th style={{ padding: '15px 20px', fontWeight: '700', textTransform: 'uppercase', fontSize: '0.85rem' }}>Deposit (70%)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {estates.map((estate, i) => {
+                        // Helper to calculate deposit if not present
+                        const calculateDeposit = (priceStr) => {
+                          if (estate.deposit) return estate.deposit;
+                          // Extract number from price like "10m" or "from 9m"
+                          const match = priceStr.match(/(\d+(\.\d+)?)/);
+                          if (match) {
+                            const val = parseFloat(match[1]);
+                            const dep = (val * 0.7).toFixed(1);
+                            return `${dep}${priceStr.includes('m') ? 'm' : ''}`;
+                          }
+                          return "-";
+                        };
+
+                        return (
+                          <tr key={i} style={{ borderBottom: '1px solid #edf2f7', background: i % 2 === 0 ? '#ffffff' : '#f8fafc' }}>
+                            <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '600' }}>{i + 1}. {estate.name.toUpperCase()}</td>
+                            <td style={{ padding: '15px 20px', color: 'var(--accent-gold)', fontWeight: '700' }}>{estate.price.toUpperCase()}</td>
+                            <td style={{ padding: '15px 20px', fontSize: '0.9rem', color: 'var(--text-light)' }}>{estate.distance.toUpperCase()}</td>
+                            <td style={{ padding: '15px 20px', color: 'var(--primary-blue)', fontWeight: '700' }}>{calculateDeposit(estate.price).toUpperCase()}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             ))}
           </div>
