@@ -418,6 +418,10 @@
     gap: 20px;
   }
   
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
   .properties-grid {
     grid-template-columns: repeat(2, 1fr);
   }
