@@ -12,7 +12,7 @@ export const estatesData = {
   ],
   "Gayaza Road Estates": [
     { name: "Gayaza Zirobwe Levi Estate", price: "10m", distance: "2.2km off mainroad" },
-    { name: "Gayaza Janda Heaven Estate", price: "11m", distance: "4km off mainroad" },
+    { name: "Gayaza Janda Haven Estate", price: "11m", distance: "4km off mainroad" },
     { name: "Gayaza Vumba Nazareth Estate", price: "12m", distance: "3.5km off mainroad" },
     { name: "Gayaza Vumba Numbers Estate", price: "15m", distance: "4km off mainroad" },
     { name: "Gayaza Vumba Hilltop Phase II", price: "16m", distance: "2.2km off mainroad" },
