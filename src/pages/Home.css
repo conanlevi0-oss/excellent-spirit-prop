@@ -432,6 +432,16 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    background-attachment: scroll;
+    height: auto;
+    padding: 100px 0;
+  }
+  
+  .hero-content {
+    padding: 0 20px;
+  }
+
   .hero-title {
     font-size: 2.5rem;
   }
@@ -442,6 +452,11 @@
   
   .hero-buttons {
     flex-direction: column;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
   
   .trust-indicators {
