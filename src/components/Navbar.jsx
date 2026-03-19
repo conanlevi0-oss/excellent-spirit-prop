@@ -52,7 +52,7 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/properties" className={({isActive}) => isActive ? "active-link" : ""} onClick={toggleMenu}>
+            <NavLink to="/properties" className={({isActive}) => `highlight-link ${isActive ? "active-link" : ""}`} onClick={toggleMenu}>
               Properties
             </NavLink>
           </li>

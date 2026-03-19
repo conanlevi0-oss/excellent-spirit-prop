@@ -103,6 +103,34 @@
   display: none;
 }
 
+.nav-links li a.highlight-link {
+  color: var(--primary-blue);
+  background-color: rgba(245, 130, 32, 0.1); /* Subtle gold tint */
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1.5px solid var(--accent-gold);
+  font-weight: 700;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.nav-links li a.highlight-link::after {
+  display: none; /* Remove underline for the highlighted button-like link */
+}
+
+.nav-links li a.highlight-link:hover {
+  background-color: var(--accent-gold);
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(245, 130, 32, 0.2);
+}
+
+.nav-links li a.highlight-link.active-link {
+  background-color: var(--primary-blue);
+  border-color: var(--primary-blue);
+  color: white !important;
+}
+
 .nav-cta a {
   padding: 10px 24px;
   color: var(--text-white) !important;
