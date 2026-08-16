@@ -1,194 +1,210 @@
-import { MapPin, Mail, Phone, GraduationCap, Briefcase } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { 
+  GraduationCap, 
+  Briefcase, 
+  Users, 
+  ShieldCheck, 
+  Phone, 
+  MessageCircle, 
+  CheckCircle2, 
+  Award,
+  ArrowRight,
+  Compass,
+  FileCheck
+} from 'lucide-react';
+import './Team.css';
 
 const Team = () => {
-  const teamMembers = [
+  const leader = {
+    name: "Agent Joshua Mwiseneza",
+    title: "Team Leader & Team Captain",
+    image: "/leader.jpeg",
+    bio: "Team Leader and Team Captain at Excellent Spirit Property Masters Limited. Joshua holds a First Class Bachelor's Degree in Business Administration from Uganda Christian University (UCU) as well as a Master of Business Administration (MBA) from UCU. Over 7+ years of dedicated service in Uganda's real estate sector, he has directly guided over 1,000 families, individuals, and corporate clients in safely acquiring their titled plots across our estates.",
+    education: [
+      "Master of Business Administration (MBA) — Uganda Christian University (UCU)",
+      "Bachelor of Business Administration (First Class Honors) — Uganda Christian University (UCU)"
+    ],
+    experienceYears: "7+ Years",
+    clientsServed: "1,000+ Clients",
+    specialization: "Land Tenure Conveyancing & Estate Strategic Development"
+  };
+
+  const departments = [
     {
-      name: "Agent Joshua Mwiseneza",
-      role: "Team Leader & Team Captain",
-      image: "/leader.jpeg",
-      bio: "Team leader and team captain at Excellent Spirit Property Masters Limited with first class degree in Business administration from Uganda Christian university. Plus Masters of Business administration from Uganda Christian university. With an experience of 7 years in real estate and served over 1000 clients and helped them acquire their plots of land in our estates.",
-      education: [
-        "First Class Degree in Business Administration - Uganda Christian University",
-        "Masters of Business Administration - Uganda Christian University"
-      ],
-      experience: "7+ Years",
-      clients: "1000+"
-    },
-    {
-      name: "Eng. Samuel Okello",
+      title: "Cadastral Surveying & Geomatics",
+      icon: <Compass size={28} className="gold-icon" />,
+      lead: "Eng. Samuel Okello",
       role: "Lead Land Surveyor",
-      image: "/exc.jpeg", // Placeholder
-      bio: "A registered professional surveyor with extensive experience in boundary opening and cadastral surveys across Uganda.",
-      education: ["BSc. Land Surveying & Geomatics"],
-      experience: "10 Years",
-      clients: "800+"
+      credentials: "BSc. Land Surveying & Geomatics (Makerere)",
+      description: "Oversees physical boundary opening, mutation surveys, GPS coordinate verification, and boundary marker placement across all 40+ road corridor estates."
     },
     {
-      name: "Sarah Namubiru",
-      role: "Senior Legal Consultant",
-      image: "/exc.jpeg", // Placeholder
-      bio: "Specializes in land law and title processing. Sarah ensures every transaction is legally sound and transparent for our clients.",
-      education: ["Bachelor of Laws (LLB)"],
-      experience: "5 Years",
-      clients: "500+"
+      title: "Legal Conveyancing & Title Searches",
+      icon: <FileCheck size={28} className="gold-icon" />,
+      lead: "Advocate Sarah Namubiru",
+      role: "Senior Legal Counsel",
+      credentials: "LLB (Hons), Dip. LP (LDC)",
+      description: "Directs Ministry of Lands (NLIS) searches, legal sales agreement execution, stamp duty processing, and duplicate certificate of title transfers."
     },
     {
-      name: "David Mukasa",
-      role: "Head of Operations",
-      image: "/exc.jpeg", // Placeholder
-      bio: "Overseeing daily project management and ensuring our estates are developed to the highest standards.",
-      education: ["Bachelors in Management Systems"],
-      experience: "6 Years",
-      clients: "N/A"
+      title: "Estate Operations & Field Logistics",
+      icon: <Briefcase size={28} className="gold-icon" />,
+      lead: "David Mukasa",
+      role: "Head of Field Operations",
+      credentials: "BSc. Project Planning & Land Management",
+      description: "Coordinates free physical site visit transportation from Daaki House Makerere and supervises road grading and neighborhood infrastructure development."
     },
     {
-      name: "Grace Atim",
+      title: "Client Care & Diaspora Advisory",
+      icon: <Users size={28} className="gold-icon" />,
+      lead: "Grace Atim",
       role: "Client Relations Manager",
-      image: "/exc.jpeg", // Placeholder
-      bio: "Grace is your first point of contact, dedicated to understanding your property needs and matching you with your dream plot.",
-      education: ["Bachelors in Public Relations"],
-      experience: "4 Years",
-      clients: "400+"
+      credentials: "BA. Public Relations & Communications",
+      description: "Assists first-time buyers and overseas diaspora clients with customized payment plans, title status updates, and site inspection schedules."
     }
   ];
 
-  const leader = teamMembers[0];
-  const staff = teamMembers.slice(1);
-
   return (
     <div className="team-page">
-      <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(11, 34, 57, 0.8), rgba(11, 34, 57, 0.8)), url("/hero_background.png")' }}>
+      {/* Page Hero */}
+      <section className="page-hero">
         <div className="container">
-          <h1 className="page-title animate-fade-in">Meet Our Team</h1>
-          <p className="page-subtitle animate-fade-in">Dedicated Professionals Serving You with Integrity</p>
+          <div className="page-hero-inner">
+            <span className="page-hero-eyebrow">Dedicated Professionals</span>
+            <h1 className="page-hero-title">Our Leadership & Technical Experts</h1>
+            <p className="page-hero-desc">
+              Meet the qualified professionals committed to walking alongside you in every step of authentic land ownership, legal documentation, and surveying in Uganda.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* Leader Section */}
+      {/* Leader In Focus */}
       <section className="section">
         <div className="container">
-          <div className="leader-card" style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1.5fr)', 
-            gap: '50px', 
-            alignItems: 'center',
-            backgroundColor: 'white',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            boxShadow: 'var(--shadow-lg)',
-            border: '1px solid var(--border-color)'
-          }}>
-            <div className="leader-image-wrapper" style={{ height: '100%', minHeight: '400px' }}>
-              <img src={leader.image} alt={leader.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-            <div className="leader-info" style={{ padding: '40px' }}>
-              <div style={{ marginBottom: '25px' }}>
-                <span style={{ color: 'var(--accent-gold)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.9rem' }}>{leader.role}</span>
-                <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display", serif', color: 'var(--primary-blue)', margin: '10px 0' }}>{leader.name}</h2>
+          <div className="leader-spotlight-card">
+            <div className="leader-photo-box">
+              <img 
+                src={leader.image} 
+                alt={leader.name} 
+                className="leader-img"
+              />
+              <div className="leader-trust-stamp">
+                <ShieldCheck size={18} className="gold-icon" />
+                <span>Verified Leadership</span>
               </div>
-              
-              <p style={{ fontSize: '1.15rem', lineHeight: '1.8', color: 'var(--text-light)', marginBottom: '30px', fontStyle: 'italic' }}>"{leader.bio}"</p>
-              
-              <div className="leader-stats" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', marginBottom: '40px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <div style={{ backgroundColor: 'rgba(197, 160, 89, 0.1)', padding: '12px', borderRadius: '50%', color: 'var(--accent-gold)' }}>
-                    <Briefcase size={24} />
-                  </div>
-                  <div>
-                    <strong style={{ display: 'block', fontSize: '1.2rem', color: 'var(--primary-blue)' }}>{leader.experience}</strong>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Real Estate Experience</span>
-                  </div>
+            </div>
+
+            <div className="leader-details-box">
+              <span className="leader-role-tag">{leader.title}</span>
+              <h2 className="leader-name">{leader.name}</h2>
+              <p className="leader-bio-text">{leader.bio}</p>
+
+              {/* Milestones Stats */}
+              <div className="leader-metrics-grid">
+                <div className="leader-metric-item">
+                  <span className="metric-num">{leader.experienceYears}</span>
+                  <span className="metric-lbl">Uganda Real Estate Experience</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                  <div style={{ backgroundColor: 'rgba(197, 160, 89, 0.1)', padding: '12px', borderRadius: '50%', color: 'var(--accent-gold)' }}>
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <strong style={{ display: 'block', fontSize: '1.2rem', color: 'var(--primary-blue)' }}>{leader.clients}</strong>
-                    <span style={{ fontSize: '0.9rem', color: 'var(--text-light)' }}>Happy Clients Served</span>
-                  </div>
+                <div className="leader-metric-item">
+                  <span className="metric-num">{leader.clientsServed}</span>
+                  <span className="metric-lbl">Happy Landowners Guided</span>
+                </div>
+                <div className="leader-metric-item">
+                  <span className="metric-num">100%</span>
+                  <span className="metric-lbl">Dispute-Free Title Delivery</span>
                 </div>
               </div>
 
-              <div className="education">
-                <h4 style={{ display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--primary-blue)', marginBottom: '15px' }}>
-                  <GraduationCap /> Education & Qualifications
+              {/* Academic Credentials */}
+              <div className="leader-education-panel">
+                <h4 className="edu-title">
+                  <GraduationCap size={20} className="gold-icon" />
+                  Academic & Professional Qualifications
                 </h4>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
-                  {leader.education.map((edu, i) => (
-                    <li key={i} style={{ marginBottom: '8px', paddingLeft: '20px', position: 'relative' }}>
-                      <span style={{ position: 'absolute', left: 0, top: '10px', width: '6px', height: '6px', backgroundColor: 'var(--accent-gold)', borderRadius: '50%' }}></span>
-                      {edu}
+                <ul className="edu-list">
+                  {leader.education.map((edu, idx) => (
+                    <li key={idx}>
+                      <CheckCircle2 size={16} className="gold-icon flex-shrink" />
+                      <span>{edu}</span>
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* Leader Direct Actions */}
+              <div className="leader-action-bar">
+                <a 
+                  href="https://wa.me/256777367716?text=Hello%20Agent%20Joshua,%20I%20would%20like%20to%20consult%20with%20you%20regarding%20land%20acquisition"
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn btn-gold btn-sm"
+                >
+                  <MessageCircle size={16} />
+                  <span>Consult with Agent Joshua</span>
+                </a>
+                <Link to="/contact" className="btn btn-outline btn-sm">
+                  <span>Schedule Office Meeting</span>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Staff Grid */}
-      <section className="section bg-light-alt" style={{ backgroundColor: '#f8f9fa' }}>
+      {/* Departments Grid */}
+      <section className="section bg-surface">
         <div className="container">
-          <h2 className="section-title">Professional Support Team</h2>
-          <p className="section-subtitle">A collective of experts dedicated to making your land ownership journey seamless.</p>
-          
-          <div className="staff-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '30px', marginTop: '50px' }}>
-            {staff.map((member, index) => (
-              <div key={index} className="staff-card" style={{ 
-                backgroundColor: 'white', 
-                borderRadius: '8px', 
-                overflow: 'hidden', 
-                boxShadow: 'var(--shadow-md)',
-                transition: 'var(--transition)'
-              }}>
-                <div style={{ height: '300px' }}>
-                  <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div className="section-header text-center">
+            <span className="section-eyebrow">
+              <span className="section-eyebrow-dot"></span>
+              Departmental Competence
+            </span>
+            <h2 className="section-title">Technical Support & Legal Specialists</h2>
+            <p className="section-desc">
+              Every stage of your land purchase is safeguarded by qualified personnel working under strict ethical guidelines.
+            </p>
+          </div>
+
+          <div className="departments-grid">
+            {departments.map((dept, index) => (
+              <div key={index} className="department-card">
+                <div className="dept-icon-box">
+                  {dept.icon}
                 </div>
-                <div style={{ padding: '25px', textAlign: 'center' }}>
-                  <h3 style={{ fontSize: '1.25rem', color: 'var(--primary-blue)', marginBottom: '5px' }}>{member.name}</h3>
-                  <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', marginBottom: '15px', display: 'block' }}>{member.role}</span>
-                  <p style={{ color: 'var(--text-light)', fontSize: '0.95rem', lineHeight: '1.6' }}>{member.bio}</p>
+                <h3 className="dept-title">{dept.title}</h3>
+                <div className="dept-lead-info">
+                  <span className="dept-lead-name">{dept.lead}</span>
+                  <span className="dept-lead-role">{dept.role}</span>
+                  <span className="dept-lead-cred">{dept.credentials}</span>
                 </div>
+                <p className="dept-desc">{dept.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <style>{`
-        .page-header {
-          height: 350px;
-          background-size: cover;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          color: white;
-        }
-        .page-title {
-          font-size: 3.5rem;
-          color: white;
-          margin-bottom: 15px;
-        }
-        .page-subtitle {
-          font-size: 1.2rem;
-          letter-spacing: 1px;
-          color: rgba(255,255,255,0.9);
-        }
-        .staff-card:hover {
-          transform: translateY(-5px);
-          box-shadow: var(--shadow-lg) !important;
-        }
-        @media (max-width: 992px) {
-          .leader-card { grid-template-columns: 1fr !important; }
-          .leader-image-wrapper { height: 400px !important; }
-        }
-        @media (max-width: 768px) {
-          .page-title { font-size: 2.5rem; }
-        }
-      `}</style>
+      {/* Professional Pledge */}
+      <section className="section">
+        <div className="container-narrow">
+          <div className="team-pledge-card">
+            <Award size={36} className="gold-icon" />
+            <h2>Our Professional Pledge to Every Land Buyer</h2>
+            <p>
+              "We pledge never to withhold relevant information, never to sell unverified land, and to ensure that every boundary marker and certificate of title delivered represents true, honorable stewardship."
+            </p>
+            <span className="pledge-signature">— The Excellent Spirit Team</span>
+
+            <div className="pledge-actions">
+              <Link to="/contact" className="btn btn-primary">
+                <span>Book Appointment with Our Team</span>
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

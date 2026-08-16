@@ -1,0 +1,222 @@
+/* ==========================================================================
+   ABOUT US PAGE STYLES
+   ========================================================================== */
+
+.about-story-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.story-lead-p {
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: var(--c-primary);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.about-story-content p {
+  margin-bottom: 20px;
+  font-size: 1.025rem;
+  line-height: 1.75;
+}
+
+.registration-certificate-card {
+  background-color: var(--c-surface-warm);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 32px;
+}
+
+.cert-icon-box {
+  width: 48px;
+  height: 48px;
+  background-color: var(--c-gold-tint);
+  border: 1px solid var(--c-gold-border);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.registration-certificate-card h4 {
+  font-size: 1.05rem;
+  color: var(--c-primary);
+  margin-bottom: 6px;
+}
+
+.registration-certificate-card p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin: 0;
+  color: var(--c-text-muted);
+}
+
+/* Media Card */
+.about-media-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+}
+
+.about-primary-img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
+.about-media-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 16px;
+  background-color: var(--c-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius-sm);
+  margin-top: 16px;
+}
+
+.about-media-badge strong {
+  display: block;
+  font-size: 1.05rem;
+  color: var(--c-gold-light);
+}
+
+.about-media-badge span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--c-text-white-dim);
+}
+
+/* Expanded Pillars */
+.pillars-expanded-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.expanded-pillar-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 36px 28px;
+  transition: all var(--t-base);
+}
+
+.expanded-pillar-card:hover {
+  border-color: var(--c-gold-border);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+.pillar-num {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--c-gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.expanded-pillar-card h3 {
+  font-size: 1.25rem;
+  color: var(--c-primary);
+  margin-bottom: 12px;
+}
+
+.expanded-pillar-card p {
+  font-size: 0.925rem;
+  line-height: 1.7;
+  color: var(--c-text-muted);
+}
+
+/* Commitment Banner */
+.about-commitment-card {
+  background-color: var(--c-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 64px 48px;
+}
+
+.commitment-header {
+  max-width: 700px;
+  margin-bottom: 48px;
+}
+
+.commitment-header h2 {
+  color: #FFFFFF;
+  font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+}
+
+.commitment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 48px;
+  margin-bottom: 48px;
+}
+
+.commitment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.commitment-item h4 {
+  color: #FFFFFF;
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.commitment-item p {
+  color: var(--c-text-white-dim);
+  font-size: 0.925rem;
+  line-height: 1.65;
+}
+
+.commitment-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .about-story-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .pillars-expanded-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .commitment-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .about-commitment-card {
+    padding: 40px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .pillars-expanded-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .commitment-cta {
+    flex-direction: column;
+  }
+}

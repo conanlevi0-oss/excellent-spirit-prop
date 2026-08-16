@@ -1,0 +1,232 @@
+/* ==========================================================================
+   SERVICES PAGE STYLES
+   ========================================================================== */
+
+.services-editorial-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.service-editorial-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: 48px 44px;
+  box-shadow: var(--shadow-subtle);
+  transition: all var(--t-base);
+}
+
+.service-editorial-card:hover {
+  border-color: var(--c-gold-border);
+  box-shadow: var(--shadow-card);
+}
+
+.service-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.service-icon-box {
+  width: 64px;
+  height: 64px;
+  background-color: var(--c-gold-tint);
+  border: 1px solid var(--c-gold-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.service-tag-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--c-gold-hover);
+  margin-bottom: 6px;
+}
+
+.service-title {
+  font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+  color: var(--c-primary);
+  margin-bottom: 4px;
+}
+
+.service-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--c-text-muted);
+}
+
+.service-desc-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--c-text-muted);
+  margin-bottom: 32px;
+}
+
+.service-highlights-box {
+  background-color: var(--c-surface-warm);
+  border-radius: var(--radius-sm);
+  padding: 24px 28px;
+  border: 1px solid var(--c-border-subtle);
+  margin-bottom: 36px;
+}
+
+.service-highlights-box h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-primary);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.service-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 24px;
+}
+
+.service-checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.925rem;
+  color: var(--c-text-main);
+  line-height: 1.5;
+}
+
+.service-card-footer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--c-border-subtle);
+}
+
+/* FAQ Accordion */
+.faq-accordion-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: all var(--t-fast);
+}
+
+.faq-item-card.is-open {
+  border-color: var(--c-gold);
+  box-shadow: var(--shadow-subtle);
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 22px 24px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+  gap: 16px;
+}
+
+.faq-question-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--c-primary);
+  line-height: 1.4;
+}
+
+.faq-toggle-icon {
+  color: var(--c-gold);
+  flex-shrink: 0;
+}
+
+.faq-answer-content {
+  padding: 0 24px 24px 24px;
+  border-top: 1px solid var(--c-border-subtle);
+}
+
+.faq-answer-content p {
+  padding-top: 16px;
+  font-size: 0.975rem;
+  line-height: 1.7;
+  color: var(--c-text-muted);
+}
+
+/* Consultation Banner */
+.consultation-banner {
+  background-color: var(--c-primary);
+  color: #FFFFFF;
+  border-radius: var(--radius-md);
+  padding: 60px 48px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.consultation-banner h2 {
+  color: #FFFFFF;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 16px;
+}
+
+.consultation-banner p {
+  color: var(--c-text-white-dim);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.consultation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .service-editorial-card {
+    padding: 32px 24px;
+  }
+  
+  .service-checklist {
+    grid-template-columns: 1fr;
+  }
+  
+  .consultation-banner {
+    grid-template-columns: 1fr;
+    padding: 36px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-card-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .service-card-footer {
+    flex-direction: column;
+  }
+  
+  .service-card-footer .btn {
+    width: 100%;
+  }
+}

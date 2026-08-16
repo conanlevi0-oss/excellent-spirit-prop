@@ -1,322 +1,377 @@
-import { MapPin, Phone, ChevronDown, ChevronUp, Ruler, Clock, Landmark, Share2, Heart } from 'lucide-react';
+import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { estatesData } from '../data/estates';
+import { 
+  MapPin, 
+  Phone, 
+  Search, 
+  Filter, 
+  FileDown, 
+  MessageCircle, 
+  ShieldCheck, 
+  Compass, 
+  CalendarCheck,
+  CheckCircle2,
+  Car,
+  Layers,
+  ArrowRight,
+  Info
+} from 'lucide-react';
+import { estatesData, flagshipEstates, roadCorridors } from '../data/estates';
+import './Properties.css';
 
 const Properties = () => {
-  const [expandedRoads, setExpandedRoads] = useState(['Gayaza Road Estates']);
+  const [selectedCorridor, setSelectedCorridor] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTenure, setSelectedTenure] = useState('all');
 
-  const toggleRoad = (road) => {
-    setExpandedRoads(prev => 
-      prev.includes(road) ? prev.filter(r => r !== road) : [...prev, road]
-    );
-  };
+  // Convert raw estatesData dictionary into flattened list for easy search and filtering
+  const allEstatesList = useMemo(() => {
+    const list = [];
+    Object.entries(estatesData).forEach(([category, items]) => {
+      // Determine corridor id from category name
+      let corridorId = 'other';
+      if (category.toLowerCase().includes('gayaza')) corridorId = 'gayaza';
+      else if (category.toLowerCase().includes('hoima')) corridorId = 'hoima';
+      else if (category.toLowerCase().includes('jinja')) corridorId = 'jinja';
+      else if (category.toLowerCase().includes('bombo')) corridorId = 'bombo';
+      else if (category.toLowerCase().includes('mityana')) corridorId = 'mityana';
+      else if (category.toLowerCase().includes('2026')) corridorId = 'all';
 
-  const listings = [
-    // ... (existing featured listings)
-    {
-      id: 1,
-      image: '/property_land_1.png',
-      status: 'For Sale',
-      type: 'Private Mailo Land',
-      title: 'Prime 50x100 Plot in Gayaza',
-      location: 'Gayaza Road Area',
-      price: 'Flexible Payment Plan',
-      features: ['Ready title', 'Good access roads', 'Developed neighborhood']
-    },
-    {
-      id: 2,
-      image: '/hero_background.png',
-      status: 'New Listing',
-      type: 'Kabaka Land',
-      title: 'Large Estate Land for Development',
-      location: 'Kampala District',
-      price: 'Contact for Price',
-      features: ['Surveyed', 'Water & Electricity available', '4 Months Installments']
-    },
-    {
-      id: 3,
-      image: '/exc.jpeg',
-      status: 'Available',
-      type: 'Freehold Land',
-      title: 'Residential Plot near Amenities',
-      location: 'Kubiiri Roundabout Area',
-      price: 'Flexible Payment Plan',
-      features: ['Secure neighborhood', 'Clear documentation', 'Ready for immediate transfer']
-    }
+      items.forEach((item) => {
+        list.push({
+          ...item,
+          category,
+          corridorId: corridorId === 'all' ? (item.name.toLowerCase().includes('zirobwe') || item.name.toLowerCase().includes('busiika') || item.name.toLowerCase().includes('vumba') || item.name.toLowerCase().includes('janda') ? 'gayaza' : item.name.toLowerCase().includes('entebbe') ? 'entebbe' : 'other') : corridorId
+        });
+      });
+    });
+    return list;
+  }, []);
+
+  // Filtered flagship list
+  const filteredFlagships = useMemo(() => {
+    return flagshipEstates.filter((item) => {
+      const matchesCorridor = selectedCorridor === 'all' || item.corridorId === selectedCorridor;
+      const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            item.corridor.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesTenure = selectedTenure === 'all' || item.tenure.toLowerCase().includes(selectedTenure.toLowerCase());
+      return matchesCorridor && matchesSearch && matchesTenure;
+    });
+  }, [selectedCorridor, searchQuery, selectedTenure]);
+
+  // Road Categories for the directory
+  const roadCategories = [
+    { title: "Gayaza Road Estates", key: "Gayaza Road Estates", corridorId: "gayaza" },
+    { title: "Hoima Road Estates", key: "Hoima Road Estates", corridorId: "hoima" },
+    { title: "Jinja Road Estates", key: "Jinja Road Estates", corridorId: "jinja" },
+    { title: "Bombo Road Estates", key: "Bombo Road Estates", corridorId: "bombo" },
+    { title: "Mityana Road Estates", key: "Mityana Road Estates", corridorId: "mityana" }
   ];
 
   return (
     <div className="properties-page">
-      <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(11, 34, 57, 0.8), rgba(11, 34, 57, 0.8)), url("/hero_background.png")' }}>
+      {/* Page Hero */}
+      <section className="page-hero">
         <div className="container">
-          <h1 className="page-title animate-fade-in">Estate Catalog</h1>
-          <p className="page-subtitle animate-fade-in">Premium Real Estate Stock & Investment Opportunities</p>
+          <div className="page-hero-inner">
+            <span className="page-hero-eyebrow">Official 2026 Real Estate Stock</span>
+            <h1 className="page-hero-title">Uganda Estate Catalog & Price Directory</h1>
+            <p className="page-hero-desc">
+              Browse over 40 authenticated estates across Gayaza, Hoima, Jinja, Bombo, and Mityana road corridors. All plots feature verified survey pointers, clear tenure status, and 4-month installment schedules.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* 2025 Estate Update (Table Style) */}
-      <section className="section bg-white">
+      {/* Filter & Search Bar */}
+      <section className="catalog-toolbar-section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <span style={{ color: 'var(--accent-gold)', fontWeight: '600', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '2px' }}>Excellent Spirit Stock as of 2026</span>
-            <h2 className="section-title">Comprehensive Price List</h2>
-            <p className="section-subtitle">Examine our wide selection of estates grouped by major road access.</p>
-            
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '20px' }}>
-              <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px' }}>
-                <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} /> View Full PDF
-              </a>
-              <a href="/exc.pdf" download="Excellent_Spirit_Estate_Update_2025.pdf" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '10px 20px' }}>
-                <ChevronDown size={18} /> Download Catalog
+          <div className="catalog-toolbar-card">
+            {/* Search Input */}
+            <div className="search-box-wrap">
+              <Search size={18} className="search-icon" />
+              <input 
+                type="text" 
+                placeholder="Search by estate name (e.g. Zirobwe, Busiika, Matugga, Mukono)..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="catalog-search-input"
+              />
+              {searchQuery && (
+                <button 
+                  type="button" 
+                  onClick={() => setSearchQuery('')}
+                  className="search-clear-btn"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+
+            {/* Tenure Selector */}
+            <div className="toolbar-tenure-select">
+              <Filter size={16} className="filter-icon" />
+              <select 
+                value={selectedTenure} 
+                onChange={(e) => setSelectedTenure(e.target.value)}
+                className="tenure-dropdown"
+              >
+                <option value="all">All Tenure Types</option>
+                <option value="mailo">Private Mailo (Titled)</option>
+                <option value="freehold">Freehold Title</option>
+                <option value="kabaka">Kabaka Land</option>
+              </select>
+            </div>
+
+            {/* Catalog Download CTA */}
+            <div className="toolbar-pdf-cta">
+              <a 
+                href="/exc.pdf" 
+                download="Excellent_Spirit_Estate_Update_2025.pdf" 
+                className="btn btn-primary btn-sm"
+              >
+                <FileDown size={15} />
+                <span>Download PDF Price List</span>
               </a>
             </div>
           </div>
 
-          <div className="estate-tables">
-            {Object.entries(estatesData)
-              .filter(([road]) => road === "Excellent Spirit Stock as of 2026")
-              .map(([road, estates]) => (
-              <div key={road} className="premium-stock-section" style={{ marginBottom: '60px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-                  {estates.slice(0, 9).map((estate, i) => (
-                    <div key={i} className="property-card premium-card" style={{ 
-                      background: 'white', 
-                      borderRadius: '16px', 
-                      overflow: 'hidden', 
-                      boxShadow: '0 10px 25px rgba(0,0,0,0.05)', 
-                      transition: 'all 0.3s ease',
-                      border: '1px solid #f1f5f9',
-                      position: 'relative'
-                    }}>
-                      {/* Property Image */}
-                      <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
-                        <img 
-                          src={estate.image || '/exc.jpeg'} 
-                          alt={estate.name} 
-                          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} 
-                          className="card-img"
-                        />
-                        <div style={{ position: 'absolute', top: '15px', right: '15px', display: 'flex', gap: '8px' }}>
-                          <button style={{ background: 'rgba(255,255,255,0.9)', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer', color: 'var(--primary-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                            <Share2 size={18} />
-                          </button>
-                          <button style={{ background: 'rgba(255,255,255,0.9)', border: 'none', padding: '8px', borderRadius: '50%', cursor: 'pointer', color: '#ef4444', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                            <Heart size={18} />
-                          </button>
-                        </div>
-                        <div style={{ position: 'absolute', bottom: '15px', left: '15px', background: 'var(--accent-gold)', color: 'white', padding: '5px 12px', borderRadius: '6px', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>
-                          2026 Stock
-                        </div>
-                      </div>
-
-                      {/* Property Details */}
-                      <div style={{ padding: '25px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                          <span style={{ color: 'var(--accent-gold)', fontWeight: '800', fontSize: '1.4rem' }}>{estate.price}</span>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--text-light)', background: '#f8fafc', padding: '4px 10px', borderRadius: '20px', fontWeight: '600' }}>{estate.distance}</span>
-                        </div>
-                        <h3 style={{ color: 'var(--primary-blue)', fontSize: '1.2rem', marginBottom: '10px', fontWeight: '700', fontFamily: '"Inter", sans-serif' }}>{estate.name.toUpperCase()}</h3>
-                        <p style={{ color: 'var(--text-light)', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '20px' }}>
-                          {estate.description}
-                        </p>
-                        
-                        <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '5px', color: 'var(--primary-blue)', fontSize: '0.85rem', fontWeight: '600' }}>
-                            <Phone size={14} /> <span>Inquire Now</span>
-                          </div>
-                          <Link to="/contact" className="btn btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }}>View Details</Link>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          {/* Road Corridor Tabs */}
+          <div className="corridor-tabs-nav">
+            {roadCorridors.map((corridor) => (
+              <button
+                key={corridor.id}
+                type="button"
+                className={`corridor-tab-btn ${selectedCorridor === corridor.id ? 'active' : ''}`}
+                onClick={() => setSelectedCorridor(corridor.id)}
+              >
+                <span>{corridor.name}</span>
+                <span className="corridor-count-badge">{corridor.count}</span>
+              </button>
             ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Other Estates - Accordion/List View */}
-            <div className="other-estates" style={{ marginTop: '30px' }}>
-              <h2 style={{ color: 'var(--primary-blue)', marginBottom: '30px', borderBottom: '2px solid var(--accent-gold)', display: 'inline-block', paddingBottom: '10px' }}>Our Established Estates</h2>
-              {Object.entries(estatesData)
-                .filter(([road]) => road !== "Excellent Spirit Stock as of 2026")
-                .map(([road, estates]) => (
-                <div key={road} className="accordion-item" style={{ marginBottom: '15px', border: '1px solid var(--border-color)', borderRadius: '8px' }}>
-                  <button 
-                    onClick={() => toggleRoad(road)}
-                    style={{ 
-                      width: '100%', 
-                      padding: '20px 25px', 
-                      display: 'flex', 
-                      justifyContent: 'space-between', 
-                      alignItems: 'center', 
-                      background: expandedRoads.includes(road) ? 'var(--primary-blue)' : 'white',
-                      color: expandedRoads.includes(road) ? 'white' : 'var(--primary-blue)',
-                      border: 'none',
-                      borderRadius: expandedRoads.includes(road) ? '8px 8px 0 0' : '8px',
-                      cursor: 'pointer',
-                      transition: 'var(--transition)'
-                    }}
-                  >
-                    <span style={{ fontWeight: '600', fontSize: '1.1rem' }}>{road.toUpperCase()}</span>
-                    {expandedRoads.includes(road) ? <ChevronUp /> : <ChevronDown />}
-                  </button>
-                  
-                  {expandedRoads.includes(road) && (
-                    <div className="accordion-content" style={{ padding: '25px', background: '#f8fafc' }}>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
-                        {estates.map((estate, i) => (
-                          <div key={i} style={{ padding: '20px', background: 'white', borderRadius: '12px', border: '1px solid #edf2f7', boxShadow: '0 2px 4px rgba(0,0,0,0.02)' }}>
-                            <h4 style={{ color: 'var(--primary-blue)', marginBottom: '12px', fontSize: '1.1rem', fontWeight: '700' }}>{i + 1}. {estate.name.toUpperCase()}</h4>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                              <span style={{ color: 'var(--accent-gold)', fontWeight: '800', fontSize: '1.2rem' }}>{estate.price.toUpperCase()}</span>
-                              <span style={{ fontSize: '0.85rem', color: 'var(--text-light)', background: '#f1f5f9', padding: '4px 10px', borderRadius: '20px' }}>{estate.distance.toUpperCase()}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      {estates.length > 10 && (
-                        <div style={{ marginTop: '25px', textAlign: 'center' }}>
-                          <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-gold)', fontWeight: '600', textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-                            View more in PDF <ChevronDown size={18} style={{ transform: 'rotate(-90deg)' }} />
-                          </a>
-                        </div>
-                      )}
+      {/* Featured Flagship Stock */}
+      <section className="section catalog-content-section">
+        <div className="container">
+          <div className="catalog-section-heading">
+            <div>
+              <span className="section-eyebrow">
+                <span className="section-eyebrow-dot"></span>
+                Ready To Develop
+              </span>
+              <h2 className="section-title">2026 Priority Estate Showcase</h2>
+            </div>
+            <span className="results-count-text">
+              Showing {filteredFlagships.length} featured estates
+            </span>
+          </div>
+
+          {filteredFlagships.length === 0 ? (
+            <div className="no-results-box">
+              <Info size={32} className="gold-icon" />
+              <h3>No matching estates found</h3>
+              <p>Try resetting your search query or switching to 'All Corridors'.</p>
+              <button 
+                type="button" 
+                onClick={() => { setSearchQuery(''); setSelectedCorridor('all'); setSelectedTenure('all'); }}
+                className="btn btn-outline btn-sm"
+              >
+                Reset All Filters
+              </button>
+            </div>
+          ) : (
+            <div className="flagship-estates-grid">
+              {filteredFlagships.map((estate) => (
+                <article key={estate.id} className="estate-card">
+                  <div className="estate-card-image-box">
+                    <img 
+                      src={estate.image} 
+                      alt={estate.name} 
+                      className="estate-card-img"
+                    />
+                    <div className="estate-badges-overlay">
+                      <span className="badge badge-primary">{estate.tenure}</span>
+                      <span className="badge badge-gold">{estate.corridor}</span>
                     </div>
-                  )}
-                </div>
+                  </div>
+
+                  <div className="estate-card-body">
+                    <div className="estate-price-header">
+                      <span className="estate-price-tag">{estate.price}</span>
+                      <span className="estate-distance-tag">
+                        <MapPin size={12} />
+                        {estate.distance}
+                      </span>
+                    </div>
+
+                    <h3 className="estate-name-title">{estate.name}</h3>
+                    <p className="estate-short-desc">{estate.description}</p>
+
+                    <div className="estate-spec-pills">
+                      <span className="spec-pill">Plot: {estate.size}</span>
+                      <span className="spec-pill">Deposit: {estate.deposit}</span>
+                    </div>
+
+                    <div className="estate-card-actions">
+                      <a 
+                        href={`https://wa.me/256777367716?text=Hello%20Excellent%20Spirit,%20I%20would%20like%20to%20inquire%20about%20${encodeURIComponent(estate.name)}%20(${estate.price})`}
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn btn-gold btn-sm btn-block"
+                      >
+                        <MessageCircle size={15} />
+                        <span>Inquire on WhatsApp</span>
+                      </a>
+                      <Link to="/contact" className="btn btn-outline btn-sm btn-block">
+                        <span>Book Site Inspection</span>
+                      </Link>
+                    </div>
+                  </div>
+                </article>
               ))}
             </div>
+          )}
+        </div>
+      </section>
+
+      {/* Comprehensive Corridor Directory (Clean Data Grid) */}
+      <section className="section bg-surface">
+        <div className="container">
+          <div className="section-header text-center">
+            <span className="section-eyebrow">
+              <span className="section-eyebrow-dot"></span>
+              Complete Inventory Directory
+            </span>
+            <h2 className="section-title">All Established Road Corridor Estates</h2>
+            <p className="section-desc">
+              Standard residential and commercial plot sizes measure <strong>100 by 50 feet</strong>. Flexible payment plan of 50% deposit and balance within 4 months applies to all locations.
+            </p>
+          </div>
+
+          <div className="corridor-directory-layout">
+            {roadCategories
+              .filter(cat => selectedCorridor === 'all' || selectedCorridor === cat.corridorId)
+              .map((category) => {
+                const categoryEstates = estatesData[category.key] || [];
+                const filteredCategoryEstates = categoryEstates.filter(item => 
+                  item.name.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+
+                if (filteredCategoryEstates.length === 0 && searchQuery) return null;
+
+                return (
+                  <div key={category.key} className="corridor-group-box">
+                    <div className="corridor-group-header">
+                      <div className="corridor-title-wrap">
+                        <MapPin size={20} className="gold-icon" />
+                        <h3>{category.title}</h3>
+                      </div>
+                      <span className="corridor-items-badge">{filteredCategoryEstates.length} Estates</span>
+                    </div>
+
+                    <div className="corridor-items-grid">
+                      {filteredCategoryEstates.map((estate, idx) => (
+                        <div key={idx} className="corridor-data-card">
+                          <div className="corridor-data-top">
+                            <span className="corridor-plot-idx">#{idx + 1}</span>
+                            <span className="corridor-tenure-badge">{estate.tenure}</span>
+                          </div>
+
+                          <h4 className="corridor-estate-name">{estate.name}</h4>
+
+                          <div className="corridor-data-metrics">
+                            <div className="metric-box">
+                              <span className="metric-label">Price:</span>
+                              <span className="metric-val-price">{estate.price}</span>
+                            </div>
+                            <div className="metric-box">
+                              <span className="metric-label">Distance:</span>
+                              <span className="metric-val-dist">{estate.distance || "Near Main Road"}</span>
+                            </div>
+                          </div>
+
+                          <div className="corridor-item-footer">
+                            <a 
+                              href={`https://wa.me/256777367716?text=Inquiry%20regarding%20${encodeURIComponent(estate.name)}%20(${estate.price})`}
+                              target="_blank" 
+                              rel="noopener noreferrer" 
+                              className="direct-inquire-link"
+                            >
+                              <MessageCircle size={14} /> Inquire Now
+                            </a>
+                            <Link to="/contact" className="direct-book-link">
+                              Inspect <ArrowRight size={12} />
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
           </div>
         </div>
       </section>
 
-      {/* Featured Section */}
-      <section className="section bg-light">
+      {/* Site Inspection Experience Info */}
+      <section className="section">
         <div className="container">
-          <h2 className="section-title">Featured Highlights</h2>
-          <p className="section-subtitle">A selection of our prime property listings ready for development.</p>
-          
-          <div className="properties-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '30px', marginTop: '40px' }}>
-            {listings.map((property) => (
-              <div key={property.id} className="property-card" style={{ background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: 'var(--shadow-md)', transition: 'var(--transition)' }}>
-                <div style={{ position: 'relative', height: '240px' }}>
-                  <img src={property.image} alt={property.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  <span style={{ position: 'absolute', top: '15px', right: '15px', background: property.status === 'Sold Out' ? '#e53e3e' : 'var(--accent-gold)', color: 'white', padding: '6px 12px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: '600' }}>
-                    {property.status}
-                  </span>
-                  <span style={{ position: 'absolute', bottom: '15px', left: '15px', background: 'rgba(11, 34, 57, 0.8)', color: 'white', padding: '4px 10px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: '500' }}>
-                    {property.type}
-                  </span>
-                </div>
-                
-                <div style={{ padding: '25px' }}>
-                  <div style={{ color: 'var(--accent-gold)', fontWeight: '700', fontSize: '1.1rem', marginBottom: '10px' }}>{property.price}</div>
-                  <h3 style={{ fontFamily: '"Inter", sans-serif', fontSize: '1.25rem', marginBottom: '15px', color: 'var(--primary-blue)' }}>{property.title}</h3>
-                  <p style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-light)', marginBottom: '20px', fontSize: '0.9rem' }}>
-                    <MapPin size={16} /> {property.location}
-                  </p>
-                  
-                  <Link to="/contact" className="btn btn-primary" style={{ display: 'flex', width: '100%' }}>Inquire Now</Link>
-                </div>
+          <div className="inspection-info-card">
+            <div className="inspection-left">
+              <span className="section-eyebrow">
+                <span className="section-eyebrow-dot"></span>
+                Physical Site Visits
+              </span>
+              <h2>How Site Inspections Work</h2>
+              <p>
+                We conduct physical site inspections from <strong>Monday to Saturday</strong> departing from our head office at <strong>Daaki House Makerere</strong> (along Gayaza Road). 
+              </p>
+              <ul className="inspection-checklist">
+                <li>
+                  <CheckCircle2 size={18} className="gold-icon" />
+                  <span>Company vehicle transportation provided to and from site.</span>
+                </li>
+                <li>
+                  <CheckCircle2 size={18} className="gold-icon" />
+                  <span>Physical boundary verification with cadastral survey maps.</span>
+                </li>
+                <li>
+                  <CheckCircle2 size={18} className="gold-icon" />
+                  <span>Meet local neighbors and inspect access roads and utilities.</span>
+                </li>
+                <li>
+                  <CheckCircle2 size={18} className="gold-icon" />
+                  <span>Zero pressure: review all title documents before making any financial commitment.</span>
+                </li>
+              </ul>
+              <div className="inspection-cta-btns">
+                <Link to="/contact" className="btn btn-gold">
+                  <CalendarCheck size={16} />
+                  <span>Book Free Inspection Appointment</span>
+                </Link>
+                <a href="tel:+256777367716" className="btn btn-outline-white">
+                  <Phone size={16} />
+                  <span>Call to Schedule: +256 777 367716</span>
+                </a>
               </div>
-            ))}
+
+            </div>
+
+            <div className="inspection-right">
+              <div className="inspection-badge-box">
+                <Car size={36} className="gold-icon" />
+                <h3>Guided Field Tours</h3>
+                <p>Mon - Sat: 8:30 AM & 2:00 PM departures</p>
+                <span className="office-departure-tag">Departing: Daaki House Makerere</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* General Information Section */}
-      <section className="section bg-light-alt" style={{ backgroundColor: '#f0f4f7' }}>
-        <div className="container">
-          <div className="info-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '30px' }}>
-            <div className="info-item" style={{ textAlign: 'center', padding: '30px', background: 'white', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
-              <Ruler className="mb-3" color="var(--accent-gold)" size={40} style={{ margin: '0 auto' }} />
-              <h4 style={{ color: 'var(--primary-blue)', marginBottom: '10px' }}>Plot Dimensions</h4>
-              <p style={{ color: 'var(--text-light)' }}>Our standard plots measure <strong>100 by 50fts</strong>. Perfect for residential or light commercial development.</p>
-            </div>
-            <div className="info-item" style={{ textAlign: 'center', padding: '30px', background: 'white', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
-              <Clock className="mb-3" color="var(--accent-gold)" size={40} style={{ margin: '0 auto' }} />
-              <h4 style={{ color: 'var(--primary-blue)', marginBottom: '10px' }}>Payment Plans</h4>
-              <p style={{ color: 'var(--text-light)' }}>Flexible installments available. Pay <strong>50% deposit</strong> and the balance within <strong>4 months</strong>.</p>
-            </div>
-            <div className="info-item" style={{ textAlign: 'center', padding: '30px', background: 'white', borderRadius: '12px', boxShadow: 'var(--shadow-sm)' }}>
-              <Landmark className="mb-3" color="var(--accent-gold)" size={40} style={{ margin: '0 auto' }} />
-              <h4 style={{ color: 'var(--primary-blue)', marginBottom: '10px' }}>Financing Options</h4>
-              <p style={{ color: 'var(--text-light)' }}>We accept Bank financing, Full cash payments, and structured installment plans to suit your budget.</p>
-            </div>
-          </div>
-          
-          <div style={{ marginTop: '60px', textAlign: 'center', padding: '40px', background: 'var(--primary-blue)', borderRadius: '12px', color: 'white' }}>
-            <h3 style={{ color: 'white', marginBottom: '15px' }}>Ready to Inspect?</h3>
-            <p style={{ opacity: '0.9', marginBottom: '30px' }}>Inspection is strictly by appointment. All our titled plots have ready land titles available for verification.</p>
-            <Link to="/contact" className="btn btn-accent">Book Appointment Now</Link>
-          </div>
-        </div>
-      </section>
-
-      <style>{`
-        .page-header {
-          height: 350px;
-          background-size: cover;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          color: white;
-        }
-        .page-title {
-          font-size: 3.5rem;
-          color: white;
-          margin-bottom: 15px;
-        }
-        .page-subtitle {
-          font-size: 1.2rem;
-          letter-spacing: 1px;
-          color: rgba(255,255,255,0.9);
-        }
-        .property-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
-        }
-        .property-card:hover .card-img {
-          transform: scale(1.1);
-        }
-        .table-header-cell {
-          padding: 15px 20px;
-          font-weight: 700;
-          text-transform: uppercase;
-          fontSize: 0.85rem;
-        }
-        .table-body-cell {
-          padding: 15px 20px;
-          font-size: 0.9rem;
-        }
-        @media (max-width: 768px) {
-          .page-title { font-size: 2.5rem; }
-          .filter-bar { flex-direction: column; gap: 15px; align-items: flex-start !important; }
-          .table-header-cell {
-            padding: 10px 8px;
-            font-size: 0.65rem;
-          }
-          .table-body-cell {
-            padding: 10px 8px;
-            font-size: 0.7rem;
-          }
-          .road-section h3 {
-            font-size: 1rem !important;
-            padding: 10px 15px !important;
-          }
-        }
-        @media (max-width: 480px) {
-          .table-header-cell {
-            font-size: 0.55rem;
-            padding: 8px 4px;
-          }
-          .table-body-cell {
-            font-size: 0.6rem;
-            padding: 8px 4px;
-          }
-        }
-      `}</style>
     </div>
   );
 };

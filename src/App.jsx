@@ -29,15 +29,18 @@ function App() {
         </main>
         <Footer />
         
-        {/* Floating WhatsApp Button */}
+        {/* Modern Floating WhatsApp Connect Button */}
         <a 
-          href="https://wa.me/256777367716" 
-          className="whatsapp-float"
+          href="https://wa.me/256777367716?text=Hello%20Excellent%20Spirit%20Property%20Masters,%20I%20am%20interested%20in%20inspecting%20your%20titled%20land%20estates." 
+          className="whatsapp-floating"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
+          aria-label="Chat on WhatsApp with Excellent Spirit Property Masters"
         >
-          <MessageCircle size={32} />
+          <span className="whatsapp-icon-pulse">
+            <MessageCircle size={22} />
+          </span>
+          <span className="whatsapp-text">Chat with Advisor</span>
         </a>
       </div>
     </Router>

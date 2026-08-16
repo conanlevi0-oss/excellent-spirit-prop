@@ -1,113 +1,185 @@
-import { Map, MapPin, Building2, CreditCard } from 'lucide-react';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Compass, 
+  Map, 
+  FileCheck, 
+  CreditCard, 
+  ShieldCheck, 
+  CheckCircle2, 
+  ArrowRight, 
+  Download, 
+  MessageCircle, 
+  HelpCircle, 
+  ChevronDown, 
+  ChevronUp,
+  MapPin
+} from 'lucide-react';
+import './Services.css';
 
 const Services = () => {
-  const services = [
+  const [openFaq, setOpenFaq] = useState(0);
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const servicesData = [
     {
       id: "land-sales",
-      icon: <Map size={40} color="var(--accent-gold)" />,
-      title: "Land Sales",
-      category: "Private Mailo, Kabaka & Freehold",
-      description: "We sell titled Private Mailo, Kabaka and Freehold land. Our selection includes over 80 estates across major road corridors to suit every budget.",
-      features: [
-        "Secure Private Mailo Land",
-        "Authentic Kabaka Land",
-        "Verified Freehold Land",
-        "Ready land titles for all titled plots"
+      icon: <Map size={32} className="gold-icon" />,
+      tag: "Core Offering",
+      title: "Titled Land Sales & Estate Development",
+      subtitle: "Private Mailo, Freehold, and Kabaka Land across 40+ Estates",
+      description: "We provide genuine, litigation-free land parcels tailored for immediate residential development, farming, or long-term capital preservation. Every titled plot comes with authentic registry proof and physically opened access roads.",
+      highlights: [
+        "Private Mailo with ready certificate of title",
+        "Freehold titles with permanent ownership in perpetuity",
+        "Customary and Kabaka land with verified cultural and clan lineage",
+        "Standard 50 × 100 ft plot dimensions with physical deed corner markers",
+        "Direct access roads graded and connected to public transport routes"
       ],
-      image: "/property_land_1.png"
+      ctaText: "Explore Estate Stock",
+      ctaLink: "/properties"
     },
     {
-      id: "surveying",
-      icon: <MapPin size={40} color="var(--accent-gold)" />,
-      title: "Land Surveying",
-      category: "Professional Accuracy",
-      description: "We survey land with precision, ensuring boundary opening and demarcation are handled professionally to protect your investment.",
-      features: [
-        "Professional boundary opening",
-        "Cadastral surveying",
-        "Subdivision services",
-        "Accurate boundary markers"
+      id: "land-surveying",
+      icon: <Compass size={32} className="gold-icon" />,
+      tag: "Technical Precision",
+      title: "Cadastral Land Surveying & Boundary Demarcation",
+      subtitle: "Licensed Geomatics & Boundary Opening Services",
+      description: "Boundary disputes in Uganda arise from imprecise estimations. Our registered surveyors deploy modern GPS and total station equipment to verify coordinates, confirm cadastral boundaries, and plant official concrete boundary markers.",
+      highlights: [
+        "Official boundary opening with neighboring land verification",
+        "Cadastral surveying and deed plan production",
+        "Subdivision and mutation of large acreage into standard residential plots",
+        "Topographical surveys for architectural and drainage planning",
+        "Beacon replacement and physical boundary dispute resolution"
       ],
-      image: "/hero_background.png"
+      ctaText: "Book Surveyor Inspection",
+      ctaLink: "/contact"
     },
     {
-      id: "title-transfer",
-      icon: <Building2 size={40} color="var(--accent-gold)" />,
-      title: "Title Processing",
-      category: "Documentation Support",
-      description: "We process transfer titles efficiently, handling the bureaucracy so you can secure your land ownership without stress.",
-      features: [
-        "Transfer of land titles",
-        "Title search and verification",
-        "Caveat registration and management",
-        "General legal document support"
+      id: "title-processing",
+      icon: <FileCheck size={32} className="gold-icon" />,
+      tag: "Legal Security",
+      title: "Land Title Processing & Ministry Searches",
+      subtitle: "Seamless Documentation & Title Transfer Execution",
+      description: "We handle the bureaucratic complexity of the Ministry of Lands, Housing and Urban Development. From conducting official computerized title searches (NLIS) to drafting transfer forms and obtaining the final white page in your name.",
+      highlights: [
+        "Official Ministry of Lands (NLIS) title verification and search reports",
+        "Drafting and witnessing legal sales agreements by seasoned advocates",
+        "Payment of stamp duty and capital transfer fees clearance",
+        "Processing of mutation forms and individual plot title issuance",
+        "Caveat registration and removal for secure ownership preservation"
       ],
-      image: "/exc.jpeg"
+      ctaText: "Request Title Assistance",
+      ctaLink: "/contact"
     },
     {
       id: "financing",
-      icon: <CreditCard size={40} color="var(--accent-gold)" />,
-      title: "Flexible Payment Plans",
-      category: "Client Support",
-      description: "We believe everyone deserves a chance to own property. Our payment plans are designed to be accommodating and transparent.",
-      features: [
-        "Up to 4 months installment options",
-        "Clear payment schedules",
-        "No hidden interest rates",
-        "Secure payment channels"
+      icon: <CreditCard size={32} className="gold-icon" />,
+      tag: "Financial Accessibility",
+      title: "Flexible 4-Month Payment Plans",
+      subtitle: "Structured Installments with 0% Hidden Interest",
+      description: "We believe land ownership should not be reserved only for full-cash buyers. Excellent Spirit provides structured in-house installment plans with an initial 50% deposit and transparent 4-month repayment terms.",
+      highlights: [
+        "50% initial commitment allows you to commence boundary fencing immediately",
+        "Even monthly balance split across 4 consecutive months",
+        "Zero interest rate penalties and zero hidden facilitation charges",
+        "Full support for commercial bank and SACCO property financing packages",
+        "Transparent written receipts and financial statement reconciliation"
       ],
-      image: "/hero_background.png"
+      ctaText: "Calculate Installments",
+      ctaLink: "/"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "What is the difference between Private Mailo and Freehold land in Uganda?",
+      answer: "Private Mailo is the most common and secure land tenure in Buganda / Central Uganda, offering indefinite ownership rights registered under the Registration of Titles Act with ready title deeds. Freehold land also offers absolute ownership in perpetuity and is common in Mukono, Wakiso, and other regions. Both are safe and fully transferable."
+    },
+    {
+      question: "How do I verify that a land plot is genuinely owned by Excellent Spirit Property Masters?",
+      answer: "Before paying any money, we provide you with the duplicate title reference number and copy of the deed plan. You are encouraged to conduct an independent title search at the Ministry of Lands Zonal Office (MZO) or through your own trusted advocate. We also provide our official corporate certificate of registration (Reg No. 80020003559554)."
+    },
+    {
+      question: "What are the standard plot measurements across your estates?",
+      answer: "Our standard residential plots measure 50 by 100 feet (equivalent to approximately 0.114 acres / 464 square meters), which is the standard size for a spacious 3-4 bedroom family home with parking, compound, and garden. Commercial and larger 100x100ft plots are also available."
+    },
+    {
+      question: "How does the 4-month installment payment plan work?",
+      answer: "You deposit 50% of the total plot cost upon signing the legal sale agreement. The remaining 50% balance is divided into 4 equal monthly installments. Once the final installment is cleared, we immediately initiate the title transfer process into your name."
+    },
+    {
+      question: "Are physical site visits free of charge?",
+      answer: "Yes, site inspections are conducted free of charge from Monday to Saturday departing from our head office at Daaki House Makerere. We provide company transportation to and from the estate locations."
     }
   ];
 
   return (
     <div className="services-page">
-      <div className="page-header" style={{ backgroundImage: 'linear-gradient(rgba(11, 34, 57, 0.8), rgba(11, 34, 57, 0.8)), url("/hero_background.png")' }}>
+      {/* Page Hero */}
+      <section className="page-hero">
         <div className="container">
-          <h1 className="page-title animate-fade-in">Our Services</h1>
-          <p className="page-subtitle animate-fade-in">Comprehensive Land Solutions in Uganda</p>
+          <div className="page-hero-inner">
+            <span className="page-hero-eyebrow">Comprehensive Land Solutions</span>
+            <h1 className="page-hero-title">Land Sales, Cadastral Surveying & Title Processing</h1>
+            <p className="page-hero-desc">
+              End-to-end real estate expertise designed to safeguard your investment, verify physical boundaries, and eliminate administrative friction in Uganda.
+            </p>
+          </div>
         </div>
-      </div>
+      </section>
 
+      {/* Services List (Editorial Split Cards) */}
       <section className="section">
         <div className="container">
-          <div className="services-list" style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
-            {services.map((service, index) => (
-              <div key={service.id} className="service-row" style={{ 
-                display: 'grid', 
-                gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)', 
-                gap: '50px', 
-                alignItems: 'center',
-                direction: index % 2 !== 0 ? 'rtl' : 'ltr'
-              }}>
-                <div style={{ direction: 'ltr' }}>
-                  <img src={service.image} alt={service.title} style={{ width: '100%', height: '350px', objectFit: 'cover', borderRadius: '8px', boxShadow: 'var(--shadow-lg)' }} />
-                </div>
-                
-                <div style={{ direction: 'ltr' }}>
-                  <div style={{ marginBottom: '20px' }}>{service.icon}</div>
-                  <span style={{ color: 'var(--accent-gold)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '0.85rem' }}>{service.category}</span>
-                  <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display", serif', color: 'var(--primary-blue)', margin: '10px 0 20px' }}>{service.title}</h2>
-                  <p style={{ fontSize: '1.1rem', lineHeight: '1.7', color: 'var(--text-light)', marginBottom: '30px' }}>{service.description}</p>
-                  
-                  <ul style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                    {service.features.map((feature, fidx) => (
-                      <li key={fidx} style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '1.05rem', fontWeight: '500' }}>
-                        <div style={{ width: '8px', height: '8px', backgroundColor: 'var(--accent-gold)', borderRadius: '50%' }}></div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {service.id === "land-sales" && (
-                    <div style={{ marginTop: '30px', padding: '20px', background: '#f8fafc', borderRadius: '8px', border: '1px solid #edf2f7', display: 'flex', flexDirection: 'column', gap: '15px' }}>
-                      <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', margin: 0 }}>This list is sourced from our official 2025 Estate Update guide.</p>
-                      <div style={{ display: 'flex', gap: '10px' }}>
-                        <a href="/exc.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ padding: '8px 15px', fontSize: '0.9rem' }}>View PDF</a>
-                        <a href="/exc.pdf" download="Excellent_Spirit_Land_Catalog_2025.pdf" className="btn btn-primary" style={{ padding: '8px 15px', fontSize: '0.9rem' }}>Download Catalog</a>
-                      </div>
+          <div className="services-editorial-stack">
+            {servicesData.map((service, index) => (
+              <div key={service.id} className="service-editorial-row" id={service.id}>
+                <div className="service-editorial-card">
+                  <div className="service-card-header">
+                    <div className="service-icon-box">
+                      {service.icon}
                     </div>
-                  )}
+                    <div>
+                      <span className="service-tag-badge">{service.tag}</span>
+                      <h2 className="service-title">{service.title}</h2>
+                      <span className="service-subtitle">{service.subtitle}</span>
+                    </div>
+                  </div>
+
+                  <p className="service-desc-text">{service.description}</p>
+
+                  <div className="service-highlights-box">
+                    <h4>Key Deliverables & Standards:</h4>
+                    <ul className="service-checklist">
+                      {service.highlights.map((highlight, hIdx) => (
+                        <li key={hIdx}>
+                          <CheckCircle2 size={18} className="gold-icon flex-shrink" />
+                          <span>{highlight}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="service-card-footer">
+                    <Link to={service.ctaLink} className="btn btn-primary">
+                      <span>{service.ctaText}</span>
+                      <ArrowRight size={16} />
+                    </Link>
+                    <a 
+                      href={`https://wa.me/256777367716?text=Hello%20Excellent%20Spirit,%20I%20would%20like%20inquiry%20regarding%20${encodeURIComponent(service.title)}`}
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="btn btn-outline"
+                    >
+                      <MessageCircle size={16} />
+                      <span>Inquire on WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
@@ -115,42 +187,73 @@ const Services = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section bg-light-alt" style={{ backgroundColor: '#f0f4f8', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <h2 style={{ fontSize: '2.5rem', fontFamily: '"Playfair Display", serif', color: 'var(--primary-blue)', marginBottom: '20px' }}>Need Land Documentation Help?</h2>
-          <p style={{ fontSize: '1.2rem', color: 'var(--text-light)', marginBottom: '40px' }}>
-            Our experts are ready to assist you with land surveying, title transfers, and securing your investment.
-          </p>
-          <a href="https://wa.me/256777367716" className="btn btn-primary" style={{ padding: '15px 40px', fontSize: '1.1rem' }}>Request Assistance</a>
+      {/* FAQ Section */}
+      <section className="section bg-surface">
+        <div className="container-narrow">
+          <div className="section-header text-center">
+            <span className="section-eyebrow">
+              <span className="section-eyebrow-dot"></span>
+              Frequently Asked Questions
+            </span>
+            <h2 className="section-title">Common Questions on Buying Land in Uganda</h2>
+            <p className="section-desc">
+              Straightforward answers to the most crucial questions land buyers and diaspora investors ask about ownership, verification, and payments.
+            </p>
+          </div>
+
+          <div className="faq-accordion-stack">
+            {faqs.map((faq, index) => (
+              <div 
+                key={index} 
+                className={`faq-item-card ${openFaq === index ? 'is-open' : ''}`}
+              >
+                <button 
+                  type="button" 
+                  className="faq-question-btn"
+                  onClick={() => toggleFaq(index)}
+                  aria-expanded={openFaq === index}
+                >
+                  <span className="faq-question-text">{faq.question}</span>
+                  <span className="faq-toggle-icon">
+                    {openFaq === index ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                  </span>
+                </button>
+                {openFaq === index && (
+                  <div className="faq-answer-content">
+                    <p>{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <style>{`
-        .page-header {
-          height: 350px;
-          background-size: cover;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          color: white;
-        }
-        .page-title {
-          font-size: 3.5rem;
-          color: white;
-          margin-bottom: 15px;
-        }
-        .page-subtitle {
-          font-size: 1.2rem;
-          letter-spacing: 1px;
-          color: rgba(255,255,255,0.9);
-        }
-        @media (max-width: 768px) {
-          .service-row { grid-template-columns: 1fr !important; direction: ltr !important; }
-          .page-title { font-size: 2.5rem; }
-        }
-      `}</style>
+      {/* Consultation Banner */}
+      <section className="section">
+        <div className="container">
+          <div className="consultation-banner">
+            <div>
+              <span className="section-eyebrow" style={{ color: 'var(--c-gold-light)' }}>
+                Direct Professional Support
+              </span>
+              <h2>Need Title Processing or Surveying Assistance?</h2>
+              <p>
+                Whether you want to verify an existing title, open boundaries on inherited land, or purchase a newly surveyed plot, our technical team is ready to assist.
+              </p>
+            </div>
+            <div className="consultation-actions">
+              <Link to="/contact" className="btn btn-gold btn-lg">
+                <span>Book Office Consultation</span>
+                <ArrowRight size={18} />
+              </Link>
+              <a href="tel:+256777367716" className="btn btn-outline-white btn-lg">
+                <span>Call Hotline: +256 777 367716</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
